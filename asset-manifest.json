@@ -1,7 +1,7 @@
 {
-  "main.css": "/static/css/main.65fc9c7b.chunk.css",
-  "main.js": "/static/js/main.e993a381.chunk.js",
-  "main.js.map": "/static/js/main.e993a381.chunk.js.map",
+  "main.css": "/static/css/main.d60fa4b1.chunk.css",
+  "main.js": "/static/js/main.6d4ad296.chunk.js",
+  "main.js.map": "/static/js/main.6d4ad296.chunk.js.map",
   "static/js/1.f91446dd.chunk.js": "/static/js/1.f91446dd.chunk.js",
   "static/js/1.f91446dd.chunk.js.map": "/static/js/1.f91446dd.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
@@ -53,8 +53,8 @@
   "static/media/KasiaO.jpg": "/static/media/KasiaO.ec16dd48.jpg",
   "static/media/KasiaD.jpg": "/static/media/KasiaD.de895924.jpg",
   "static/media/Tosia.jpg": "/static/media/Tosia.ea0e92a9.jpg",
-  "static/css/main.65fc9c7b.chunk.css.map": "/static/css/main.65fc9c7b.chunk.css.map",
+  "static/css/main.d60fa4b1.chunk.css.map": "/static/css/main.d60fa4b1.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.9bec5f283ebade5ff10a3c462d1efec1.js": "/precache-manifest.9bec5f283ebade5ff10a3c462d1efec1.js",
+  "precache-manifest.d11824e320ba6375151ac784e2231e74.js": "/precache-manifest.d11824e320ba6375151ac784e2231e74.js",
   "service-worker.js": "/service-worker.js"
 }
