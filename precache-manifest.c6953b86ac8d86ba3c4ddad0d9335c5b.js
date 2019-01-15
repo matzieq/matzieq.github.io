@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/23.32d7ef4b.jpg"
   },
   {
-    "revision": "552c574dfbd2a0ca7d30",
+    "revision": "880aba6f6c2c57c5158c",
     "url": "/static/css/main.15fd7b3a.chunk.css"
   },
   {
@@ -120,8 +120,8 @@ self.__precacheManifest = [
     "url": "/static/media/22.5bf82e11.jpg"
   },
   {
-    "revision": "552c574dfbd2a0ca7d30",
-    "url": "/static/js/main.552c574d.chunk.js"
+    "revision": "880aba6f6c2c57c5158c",
+    "url": "/static/js/main.880aba6f.chunk.js"
   },
   {
     "revision": "b5599b80884ed2d36dc55d2488e3c402",
@@ -172,12 +172,12 @@ self.__precacheManifest = [
     "url": "/static/media/blue-smoke.4a6785ab.jpg"
   },
   {
-    "revision": "7e1a2916642f32850a03e42b2dc6f5a2",
-    "url": "/static/media/treblers-icon-large.7e1a2916.png"
-  },
-  {
     "revision": "2ae28e813ad173555bc10bd9eff34775",
     "url": "/static/media/gallery-button.2ae28e81.jpg"
+  },
+  {
+    "revision": "7e1a2916642f32850a03e42b2dc6f5a2",
+    "url": "/static/media/treblers-icon-large.7e1a2916.png"
   },
   {
     "revision": "71618721184e2f3956dee09a33710c58",
@@ -236,7 +236,7 @@ self.__precacheManifest = [
     "url": "/static/media/Tosia.ea0e92a9.jpg"
   },
   {
-    "revision": "e365d4329cd37391f8668974828455e1",
+    "revision": "3fa53a13beddfec469ed42bac1d68a16",
     "url": "/index.html"
   }
 ];

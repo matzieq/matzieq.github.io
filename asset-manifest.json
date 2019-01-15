@@ -1,7 +1,7 @@
 {
   "main.css": "/static/css/main.15fd7b3a.chunk.css",
-  "main.js": "/static/js/main.552c574d.chunk.js",
-  "main.js.map": "/static/js/main.552c574d.chunk.js.map",
+  "main.js": "/static/js/main.880aba6f.chunk.js",
+  "main.js.map": "/static/js/main.880aba6f.chunk.js.map",
   "static/js/1.b07b007c.chunk.js": "/static/js/1.b07b007c.chunk.js",
   "static/js/1.b07b007c.chunk.js.map": "/static/js/1.b07b007c.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.229c360f.js",
@@ -38,8 +38,8 @@
   "static/media/31.jpg": "/static/media/31.81c203fd.jpg",
   "static/media/27.jpg": "/static/media/27.6c27db2e.jpg",
   "static/media/Menu.scss": "/static/media/blue-smoke.4a6785ab.jpg",
-  "static/media/Gallery.scss": "/static/media/treblers-icon-large.7e1a2916.png",
   "static/media/gallery-button.jpg": "/static/media/gallery-button.2ae28e81.jpg",
+  "static/media/Gallery.scss": "/static/media/treblers-icon-large.7e1a2916.png",
   "static/media/Gosia.jpg": "/static/media/Gosia.af0aa9c7.jpg",
   "static/media/Marysia.jpg": "/static/media/Marysia.d8178740.jpg",
   "static/media/Lukasz.jpg": "/static/media/Lukasz.d31fb40b.jpg",
@@ -55,6 +55,6 @@
   "static/media/Tosia.jpg": "/static/media/Tosia.ea0e92a9.jpg",
   "static/css/main.15fd7b3a.chunk.css.map": "/static/css/main.15fd7b3a.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.e5ad58d96ea7760b488afcf5d8144da7.js": "/precache-manifest.e5ad58d96ea7760b488afcf5d8144da7.js",
+  "precache-manifest.c6953b86ac8d86ba3c4ddad0d9335c5b.js": "/precache-manifest.c6953b86ac8d86ba3c4ddad0d9335c5b.js",
   "service-worker.js": "/service-worker.js"
 }
