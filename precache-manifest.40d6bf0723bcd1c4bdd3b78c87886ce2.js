@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/static/media/27.352db4db.jpg"
   },
   {
-    "revision": "a605dacf1b66d12cca8c",
+    "revision": "916a260f44fa9642d7d6",
     "url": "/static/css/main.be1e89fe.chunk.css"
   },
   {
@@ -140,8 +140,8 @@ self.__precacheManifest = [
     "url": "/static/media/26.6b9b10cd.jpg"
   },
   {
-    "revision": "a605dacf1b66d12cca8c",
-    "url": "/static/js/main.a605dacf.chunk.js"
+    "revision": "916a260f44fa9642d7d6",
+    "url": "/static/js/main.916a260f.chunk.js"
   },
   {
     "revision": "fdbe8e88b45738a492330559e0dd53a9",
@@ -276,7 +276,7 @@ self.__precacheManifest = [
     "url": "/static/media/Tosia.ea0e92a9.jpg"
   },
   {
-    "revision": "1ddd7bd24de32e4fd90455c6d6881402",
+    "revision": "5881b0503e59e4c55fac273393b1a4de",
     "url": "/index.html"
   }
 ];
