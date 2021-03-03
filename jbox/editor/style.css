@@ -18,7 +18,8 @@
 }
 
 .header a,
-.controls a {
+.controls a,
+.btn a {
   color: #fbf5ef;
   text-decoration: none;
 }
