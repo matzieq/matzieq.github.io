@@ -1,0 +1,60 @@
+section.info,
+section.api {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+section.api h3 {
+  font-size: 1.3rem;
+  margin-top: 40px;
+}
+
+section.api h4 {
+  font-size: 1.2rem;
+  margin-top: 30px;
+}
+
+section.api ul {
+  list-style-type: none;
+}
+
+section.api > p {
+  font-size: 1.2rem;
+  display: inline-block;
+  padding-left: 20px;
+}
+
+section.api > ul {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  padding-left: 80px;
+}
+
+section.api > ul.api-index {
+  display: flex;
+  padding-left: 20px;
+  flex-wrap: wrap;
+}
+
+section.api > ul a {
+  color: #f2d3ab;
+}
+section.api > ol {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  padding-left: 20px;
+}
+
+section.api > ul > li > ul {
+  margin-top: 20px;
+  padding-left: 40px;
+}
+
+section.api li {
+  margin-top: 10px;
+}
+
+section.api > ul.api-index li {
+  margin-top: 0;
+  width: 110px;
+}

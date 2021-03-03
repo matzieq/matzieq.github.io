@@ -1,0 +1,281 @@
+.header li:hover {
+  color: #fbf5ef;
+  background: #c69fa5;
+}
+
+.header,
+.controls {
+  max-width: 1600px;
+  padding: 36px;
+  margin: 0 auto;
+}
+
+.header ul,
+.controls ul {
+  display: flex;
+  list-style-type: none;
+  flex-wrap: wrap;
+}
+
+.header a,
+.controls a {
+  color: #fbf5ef;
+  text-decoration: none;
+}
+
+.controls .btn-group.project-buttons {
+  margin-bottom: 100px;
+}
+
+.controls .btn.btn-file {
+  color: #fbf5ef;
+  border: none;
+  border-bottom: 1px solid #fbf5ef;
+}
+
+.controls .btn-group.project-buttons li:not(:last-of-type) {
+  border-right: 1px solid #fbf5ef;
+}
+
+.app-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+.section {
+  display: none;
+}
+
+.section.section-active {
+  display: block;
+}
+
+.draw-grid {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 322px;
+  min-width: 322px;
+  border: 1px solid #fbf5ef;
+  margin-right: 40px;
+  cursor: crosshair;
+}
+
+.draw-grid-cell {
+  width: 40px;
+  height: 40px;
+}
+
+.draw-buttons {
+  display: inline-block;
+}
+
+.btn-group {
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: none;
+  outline: none;
+  border: 1px solid #8b6d9c;
+  font-size: 1.5rem;
+  color: #8b6d9c;
+  padding: 10px;
+  cursor: pointer;
+  min-width: 220px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 0;
+}
+
+.btn.control-button {
+  border: none;
+  padding: 10px 30px;
+}
+
+.btn.btn-active {
+  border: 1px solid #fbf5ef;
+  color: #fbf5ef;
+}
+
+.btn.control-button:hover {
+  border: none;
+}
+
+.btn.btn-active.control-button {
+  border: none;
+  border-bottom: 1px solid #fbf5ef;
+}
+
+.btn.btn-small {
+  min-width: 50px;
+}
+
+.btn:hover {
+  border: 1px solid #fbf5ef;
+  background: #c69fa5;
+  color: #fbf5ef;
+}
+
+.btn-danger {
+  border: 1px solid #f2d3ab;
+  color: #f2d3ab;
+}
+
+.tools-wrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.draw-palette {
+  display: inline-grid;
+  grid-template-columns: repeat(6, 40px);
+  border: 1px solid #fbf5ef;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.color-button {
+  cursor: pointer;
+}
+
+.color-button,
+.current-color {
+  width: 40px;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 0;
+}
+
+.current-color {
+  display: inline-block;
+  border: 1px solid #fbf5ef;
+  margin-right: 20px;
+}
+
+.sprite-edit-wrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.sprite-preview-wrapper {
+  display: inline-block;
+}
+
+.sprite-preview {
+  cursor: pointer;
+}
+
+.sprite-number-wrapper {
+  margin: 10px 0 20px;
+}
+
+canvas {
+  border: 1px solid #fbf5ef;
+  cursor: pointer;
+}
+
+.tilemap-edit-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.tilemap-drawing-wrapper {
+  margin-right: 40px;
+  margin-bottom: 40px;
+}
+
+.map-drawing-surface {
+  cursor: crosshair;
+}
+
+.sprite-list-wrapper {
+  margin-right: 40px;
+}
+
+.sfx-edit-top {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tempo-control {
+  margin-right: 36px;
+}
+
+.sound-paint-wrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 36px;
+}
+
+.sound-paint {
+  margin-right: 20px;
+  cursor: crosshair;
+}
+
+.item-set-label {
+  font-size: 1.5rem;
+  min-width: 100px;
+  display: inline-block;
+  font-weight: 400;
+}
+
+.number {
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 1.5rem;
+}
+
+.sprite-flags {
+  margin-left: 36px;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+#import-data-file {
+  display: none;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(39, 39, 68, 0.7);
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: block;
+}
+
+.modal {
+  margin: 20vh auto 0;
+  width: 600px;
+  height: 400px;
+  background-color: #494d7e;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 70px 70px 30px;
+}
+
+.modal .btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal .modal-text {
+  font-size: 2rem;
+}

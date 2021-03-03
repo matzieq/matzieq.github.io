@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JBOX Editor</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a href="/"><h1>JBox</h1></a>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/jbox/editor">Editor</a></li>
+          <li><a href="/jbox/learn">Learn</a></li>
+          <li><a href="/jbox/docs">Documentation</a></li>
+          <li><a href="/jbox/about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="app-content">
+      <section class="controls">
+        <ul class="btn-group project-buttons">
+          <li>
+            <button class="btn btn-file clear-button">NEW</button>
+          </li>
+          <li>
+            <label for="import-data-file" class="btn btn-file">OPEN</label>
+            <input type="file" id="import-data-file" value="LOAD" />
+          </li>
+          <li>
+            <button class="btn btn-file download-button">SAVE</button>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <button
+              class="btn btn-active control-button"
+              data-activate="SPRITE"
+            >
+              SPRITESHEET
+            </button>
+          </li>
+          <li>
+            <button class="btn control-button" data-activate="TILEMAP">
+              TILEMAP
+            </button>
+          </li>
+          <li>
+            <button class="btn control-button" data-activate="SFX">SFX</button>
+          </li>
+        </ul>
+      </section>
+
+      <section id="SPRITE" class="sprite-edit section section-active">
+        <div class="sprite-edit-wrapper">
+          <div class="draw-grid">
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+            <div class="draw-grid-cell"></div>
+          </div>
+
+          <div class="sprite-preview-wrapper">
+            <canvas class="sprite-preview" width="320" height="320"></canvas>
+            <div class="sprite-number-wrapper">
+              <h2 class="item-set-label">SPRITE:</h2>
+              <span class="number sprite-number">1</span>
+            </div>
+          </div>
+          <div class="checkbox-group sprite-flags">
+            <span class="item-set-label">FLAGS</span>
+            <div class="checkbox-wrapper">
+              <label class="number" for="f0">0 </label
+              ><input type="checkbox" name="f0" id="f0" data-flag="0" />
+            </div>
+            <div class="checkbox-wrapper">
+              <label class="number" for="f0">1 </label
+              ><input type="checkbox" name="f1" id="f1" data-flag="1" />
+            </div>
+            <div class="checkbox-wrapper">
+              <label class="number" for="f0">2 </label
+              ><input type="checkbox" name="f2" id="f2" data-flag="2" />
+            </div>
+            <div class="checkbox-wrapper">
+              <label class="number" for="f0">3 </label
+              ><input type="checkbox" name="f3" id="f3" data-flag="3" />
+            </div>
+            <div class="checkbox-wrapper">
+              <label class="number" for="f0">4 </label
+              ><input type="checkbox" name="f4" id="f4" data-flag="4" />
+            </div>
+            <div class="checkbox-wrapper">
+              <label class="number" for="f0">5 </label
+              ><input type="checkbox" name="f5" id="f5" data-flag="5" />
+            </div>
+            <div class="checkbox-wrapper">
+              <label class="number" for="f0">6 </label
+              ><input type="checkbox" name="f6" id="f6" data-flag="6" />
+            </div>
+            <div class="checkbox-wrapper">
+              <label class="number" for="f0">7 </label
+              ><input type="checkbox" name="f7" id="f7" data-flag="7" />
+            </div>
+          </div>
+        </div>
+        <div class="tools-wrapper btn-group">
+          <div class="draw-palette">
+            <button class="color-button color-0" data-color="0"></button>
+            <button class="color-button color-1" data-color="1"></button>
+            <button class="color-button color-2" data-color="2"></button>
+            <button class="color-button color-3" data-color="3"></button>
+            <button class="color-button color-4" data-color="4"></button>
+            <button class="color-button color-5" data-color="5"></button>
+          </div>
+          <div class="current-color"></div>
+          <div class="drawing-tools">
+            <button
+              class="btn btn-small btn-active tool-button"
+              data-mode="pen"
+            >
+              PEN
+            </button>
+            <button class="btn btn-small tool-button" data-mode="fill">
+              FILL
+            </button>
+          </div>
+        </div>
+      </section>
+      <section id="TILEMAP" class="section tilemap-edit">
+        <div class="tilemap-edit-wrapper">
+          <div class="tilemap-drawing-wrapper">
+            <canvas
+              class="map-drawing-surface"
+              width="512"
+              height="512"
+            ></canvas>
+            <div class="sprite-number-wrapper">
+              <h2 class="item-set-label">COORDS:</h2>
+              <span class="number tilemap-x">1</span>
+              <span class="number">,</span>
+              <span class="number tilemap-y">1</span>
+            </div>
+          </div>
+          <div class="sprite-list-wrapper">
+            <canvas class="sprite-list" width="320" height="320"></canvas>
+            <div class="sprite-number-wrapper">
+              <h2 class="item-set-label">SPRITE:</h2>
+              <span class="number sprite-number">1</span>
+            </div>
+            <div class="drawing-tools">
+              <button
+                class="btn btn-small btn-active tool-button"
+                data-mode="pen"
+              >
+                PEN
+              </button>
+              <button class="btn btn-small tool-button" data-mode="fill">
+                FILL
+              </button>
+            </div>
+          </div>
+          <div class="tilemap-preview-wrapper">
+            <canvas class="tilemap-preview" width="512" height="512"></canvas>
+          </div>
+        </div>
+      </section>
+      <section id="SFX" class="section sfx-edit">
+        <div class="sfx-edit-top">
+          <div class="tempo-control">
+            <h2 class="item-set-label">TEMPO</h2>
+
+            <button
+              class="btn btn-active btn-small tempo-button tempo-decrease"
+            >
+              -
+            </button>
+            <span class="tempo-number number">1</span>
+            <button
+              class="btn btn-active btn-small tempo-button tempo-increase"
+            >
+              +
+            </button>
+          </div>
+          <div class="sound-control">
+            <h2 class="item-set-label">SOUND</h2>
+
+            <button class="btn btn-active btn-small sound-button sound-prev">
+              -
+            </button>
+            <span class="sound-number number">1</span>
+            <button class="btn btn-active btn-small sound-button sound-next">
+              +
+            </button>
+          </div>
+        </div>
+        <div class="sound-paint-wrapper">
+          <canvas class="sound-paint" width="512" height="320"></canvas>
+          <button class="btn btn-active deselect-button">DESELECT</button>
+        </div>
+        <div class="wave-select-wrapper btn-group">
+          <h2 class="item-set-label">WAVE</h2>
+          <button class="btn wave-button btn-active" data-type="sine">
+            SINE
+          </button>
+          <button class="btn wave-button" data-type="triangle">TRIANGLE</button>
+          <button class="btn wave-button" data-type="sawtooth">SAWTOOTH</button>
+          <button class="btn wave-button" data-type="square">SQUARE</button>
+        </div>
+        <div class="fx-select-wrapper btn-group">
+          <h2 class="item-set-label">FX</h2>
+          <button data-type="" class="btn fx-button btn-active">NONE</button>
+          <button data-type="fade-in" class="btn fx-button">FADE-IN</button>
+          <button data-type="fade-out" class="btn fx-button">FADE-OUT</button>
+          <button data-type="vibrato" class="btn fx-button">VIBRATO</button>
+          <button data-type="slide" class="btn fx-button">SLIDE</button>
+        </div>
+        <div class="octave-select-wrapper btn-group">
+          <h2 class="item-set-label">OCTAVE</h2>
+          <button class="octave-select-button btn btn-small" data-octave="-3">
+            0 - 1
+          </button>
+          <button class="octave-select-button btn btn-small" data-octave="-1">
+            2 - 3
+          </button>
+          <button class="octave-select-button btn btn-small" data-octave="1">
+            4 - 5
+          </button>
+        </div>
+        <div class="play-button-wrapper btn-group">
+          <button class="btn btn-active play-button">PLAY</button>
+        </div>
+      </section>
+      <div class="modal-overlay">
+        <div class="modal">
+          <div class="modal-text-wrapper">
+            <p class="modal-text">MODAL TEXT</p>
+          </div>
+          <div class="btn-group modal-buttons">
+            <div class="btn btn-active ok-button">OK</div>
+            <div class="btn btn-danger cancel-button">CANCEL</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="src/audioContextPatch.js"></script>
+    <script src="src/constants.js"></script>
+    <script src="src/data.js"></script>
+    <script src="src/utils.js"></script>
+    <script src="src/main.js"></script>
+  </body>
+</html>
