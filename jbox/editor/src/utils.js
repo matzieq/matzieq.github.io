@@ -1,11 +1,11 @@
 // import { palette } from "./data";
 // import { middleC } from "./constants";
 
-function updateSprite(spriteIndex, ctx, state) {
+function updateSprite(spriteIndex, ctx, state, selectedSheet = 0) {
   const sprite = state.sprites[spriteIndex];
-
-  const spriteRow = Math.floor(spriteIndex / 8);
-  const spriteCol = spriteIndex % 8;
+  const drawableSpriteIndex = spriteIndex - selectedSheet * 64;
+  const spriteRow = Math.floor(drawableSpriteIndex / 8);
+  const spriteCol = drawableSpriteIndex % 8;
   drawSprite(sprite, ctx, spriteCol * 8, spriteRow * 8);
 }
 

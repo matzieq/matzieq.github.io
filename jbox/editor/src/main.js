@@ -33,6 +33,7 @@ let appDataState = initialDataState;
 
 const appEditState = {
   mode: SPRITE,
+  selectedSpriteSheetPage: 0,
   selectedImage: 0,
   selectedScreen: 0,
   selectedSound: 0,
@@ -103,7 +104,9 @@ const downloadButton = document.querySelector(".download-button");
 const clearButton = document.querySelector(".clear-button");
 const fileInput = document.querySelector("#import-data-file");
 const toolButtons = document.querySelectorAll(".tool-button");
+const spritePageSelectButtons = document.querySelectorAll(".page-button");
 
+console.log(spritePageSelectButtons);
 /**
  * SPRITE EDIT STUFF
  */
@@ -267,6 +270,28 @@ function attachControlListeners() {
     });
   });
 
+  spritePageSelectButtons.forEach(button => {
+    button.addEventListener("click", e => {
+      if (e.target.dataset.sheetnumber) {
+        appEditState.selectedSpriteSheetPage = parseInt(
+          e.target.dataset.sheetnumber
+        );
+
+        spritePageSelectButtons.forEach(btn => {
+          btn.classList.remove(buttonActiveClass);
+
+          if (
+            parseInt(btn.dataset.sheetnumber) ===
+            appEditState.selectedSpriteSheetPage
+          ) {
+            btn.classList.add(buttonActiveClass);
+          }
+        });
+        initDrawingSurfaces();
+      }
+    });
+  });
+
   fileInput.addEventListener("change", () => {
     if (fileInput.files.length > 0) {
       const reader = new FileReader();
@@ -347,7 +372,9 @@ function attachSpriteEditListeners() {
     const mousePos = getMousePos(e, spritePreview);
     const spriteIndex =
       Math.floor(mousePos.y / 40) * 8 + Math.floor(mousePos.x / 40);
-    changeSelectedSprite(spriteIndex);
+    changeSelectedSprite(
+      spriteIndex + 64 * appEditState.selectedSpriteSheetPage
+    );
   });
 
   checkboxes.forEach(checkbox =>
@@ -360,7 +387,9 @@ function attachTilemapListeners() {
     const mousePos = getMousePos(e, mapSpritePreview);
     const spriteIndex =
       Math.floor(mousePos.y / 40) * 8 + Math.floor(mousePos.x / 40);
-    changeSelectedSprite(spriteIndex);
+    changeSelectedSprite(
+      spriteIndex + 64 * appEditState.selectedSpriteSheetPage
+    );
   });
 
   mapDrawingSurface.addEventListener("mousemove", e => {
@@ -416,7 +445,7 @@ function attachSfxListeners() {
 
 function initDrawingSurfaces() {
   fillPalette();
-  changeSelectedSprite(0);
+  changeSelectedSprite(0 + 64 * appEditState.selectedSpriteSheetPage);
   updateMap();
   updateMapPreview();
   updateSfxPaint();
@@ -425,12 +454,17 @@ function initDrawingSurfaces() {
 
 function changeSelectedSprite(newSprite) {
   appEditState.selectedImage = newSprite;
-
-  const spriteRow = Math.floor(newSprite / 8);
-  const spriteCol = newSprite % 8;
+  const mapSpriteNumber = newSprite - 64 * appEditState.selectedSpriteSheetPage;
+  const spriteRow = Math.floor(mapSpriteNumber / 8);
+  const spriteCol = mapSpriteNumber % 8;
   [spritePreviewCtx, mapSpritePreviewCtx].forEach(ctx => {
     appDataState.sprites.forEach((_, index) =>
-      updateSprite(index, ctx, appDataState)
+      updateSprite(
+        index,
+        ctx,
+        appDataState,
+        appEditState.selectedSpriteSheetPage
+      )
     );
 
     ctx.strokeStyle = palette[0];
@@ -456,7 +490,12 @@ function enableDrawing(cell) {
       floodFill(sprite, y, x, selectedColor);
     }
 
-    updateSprite(selectedImage, spritePreviewCtx, appDataState);
+    updateSprite(
+      selectedImage,
+      spritePreviewCtx,
+      appDataState,
+      appEditState.selectedSpriteSheetPage
+    );
     updateDrawingSurface(selectedImage);
     saveData();
   }
