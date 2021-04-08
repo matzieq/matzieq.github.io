@@ -242,6 +242,42 @@ canvas {
   margin-top: 5px;
 }
 
+.checkbox-wrapper label {
+  width: 50px;
+  text-align: center;
+}
+
+.checkbox-wrapper input {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.checkbox-wrapper input::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  display: block;
+  content: "";
+  background: #494d7e;
+}
+
+.checkbox-wrapper input:checked::after {
+  background: #fbf5ef;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  display: block;
+  content: "";
+}
+
 #import-data-file {
   display: none;
 }

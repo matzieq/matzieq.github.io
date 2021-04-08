@@ -166,6 +166,24 @@
           <code>x0,y0</code> and bottom right corner at <code>x1,y1</code>, in
           color <code>c</code> (or current draw color).
         </p>
+        <h4 class="code" id="f-rect">
+          rect(x0, y0, x1, y1, [c])<br />rectfill(x0, y0, x1, y1, [c])
+        </h4>
+        <p>
+          Draws a rectangle (or filled rectangle) with its top left corner at
+          <code>x0,y0</code> and bottom right corner at <code>x1,y1</code>, in
+          color <code>c</code> (or current draw color).
+        </p>
+        <h4 class="code" id="f-map">
+          map(celX = 0, celY = 0, x = 0, y = 0, w = 127, h = 127)
+        </h4>
+        <p>
+          Draws the map starting from cell coordinates <code>celX</code> and
+          <code>celY</code>, at screen coordinates <code>x, y</code>, with the
+          width and height in cells equal to <code>w</code> and <code>h</code>.
+          Calling it without any parameters will draw the entire map starting
+          from the top left corner of the screen.
+        </p>
       </section>
     </main>
     <footer class="footer">

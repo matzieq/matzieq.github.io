@@ -1,30 +1,3 @@
-// import {
-//   LOCAL_STORAGE_KEY,
-//   MAX_SPRITES,
-//   MAX_TILEMAP_SCREENS,
-//   SPRITE,
-//   TILEMAP,
-//   TILEMAP_SIZE,
-//   TILE_SIZE,
-//   MAX_SOUNDS,
-//   SOUND_SAMPLE_COUNT,
-//   buttonActiveClass,
-//   sectionActiveClass,
-//   PEN,
-//   FILL,
-// } from "./constants";
-// import { palette, initialDataState, randomdataState } from "./data";
-// import {
-//   getMousePos,
-//   updateSprite,
-//   download,
-//   drawSprite,
-//   soundEffect,
-//   getFrequency,
-//   floodFill,
-// } from "./utils";
-// import { fixAudioContext } from "./audioContextPatch";
-
 fixAudioContext(window);
 
 let appDataState = initialDataState;
@@ -106,7 +79,6 @@ const fileInput = document.querySelector("#import-data-file");
 const toolButtons = document.querySelectorAll(".tool-button");
 const spritePageSelectButtons = document.querySelectorAll(".page-button");
 
-console.log(spritePageSelectButtons);
 /**
  * SPRITE EDIT STUFF
  */
@@ -160,14 +132,14 @@ const soundDisplay = document.querySelector(".sound-number");
  * GET MOVING YOU INFERNAL MACHINE
  */
 
-init();
+getMovingYouInfernalMachine();
 modal.init();
 
 /**
  * FUNCTIONS
  */
 
-function init() {
+function getMovingYouInfernalMachine() {
   spritePreviewCtx.scale(5, 5);
   mapSpritePreviewCtx.scale(5, 5);
   mapDrawingSurfaceCtx.scale(4, 4);
@@ -308,13 +280,15 @@ function attachControlListeners() {
               const res = JSON.parse(json.slice(0, json.length - 2));
 
               if (res.sprites && res.map && res.sfx && res.spriteFlags) {
-                const sprites = deflatten(res.sprites, 64).map(sprite =>
-                  deflatten(sprite, 8)
-                );
+                const sprites = deflatten(
+                  res.sprites,
+                  TILE_SIZE * TILE_SIZE
+                ).map(sprite => deflatten(sprite, TILE_SIZE));
 
-                const tileMap = deflatten(res.map, 256).map(screen =>
-                  deflatten(screen, 16)
-                );
+                const tileMap = deflatten(
+                  res.map,
+                  TILEMAP_SIZE * TILEMAP_SIZE
+                ).map(screen => deflatten(screen, TILEMAP_SIZE));
 
                 const newData = {
                   sprites,

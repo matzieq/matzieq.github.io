@@ -33,9 +33,9 @@ const initialDataState = {
         .map(() => ({
           type: "sine",
           dist: 0,
-          oct: 0,
+          oct: -3,
           volume: 0,
-          fx: null,
+          fx: "",
         })),
     })),
 };
