@@ -1,5 +1,6 @@
 section.info,
-section.api {
+section.api,
+section.faq {
   max-width: 800px;
   margin: 0 auto;
 }
@@ -34,6 +35,7 @@ section.api > ul.api-index {
   display: flex;
   padding-left: 20px;
   flex-wrap: wrap;
+  margin: 20px 80px 0;
 }
 
 section.api > ul a {
@@ -57,4 +59,29 @@ section.api li {
 section.api > ul.api-index li {
   margin-top: 0;
   width: 110px;
+}
+
+section.api > p > span {
+  display: block;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+section.faq h3 {
+  margin: 50px 0 20px;
+  font-size: 1.3rem;
+}
+
+section.faq ul {
+  list-style-type: none;
+  margin: 0 30px;
+}
+
+section.faq ul li {
+  margin-top: 20px;
+}
+
+section.faq ul li h4 {
+  margin-bottom: 10px;
 }

@@ -48,6 +48,15 @@
           <li><a href="#f-line" class="code">line</a></li>
           <li><a href="#f-rect" class="code">rect</a></li>
           <li><a href="#f-rect" class="code">rectfill</a></li>
+          <li><a href="#f-pal" class="code">pal</a></li>
+          <li><a href="#f-palt" class="code">palt</a></li>
+          <li><a href="#f-spr" class="code">spr</a></li>
+          <li><a href="#f-btn" class="code">btn</a></li>
+          <li><a href="#f-btnp" class="code">btnp</a></li>
+          <li><a href="#f-sfx" class="code">sfx</a></li>
+          <li><a href="#f-mget" class="code">mget</a></li>
+          <li><a href="#f-mget" class="code">mset</a></li>
+          <li><a href="#f-map" class="code">map</a></li>
         </ul>
         <h3>General information</h3>
         <ol>
@@ -108,20 +117,25 @@
           </li>
         </ul>
         <h3>Graphics</h3>
-        <h4 class="code" id="f-pget">pget(x, y) <br />pset(x, y, [c])</h4>
+        <h4 class="code" id="f-pget">
+          pget(x, y) -> number <br />pset(x, y, [c])
+        </h4>
         <p>
           Returns or sets the color <code>c</code> of the pixel at coordinates
           <code>x,y</code>. If you don't specify color, the current draw color
           is used.
         </p>
-        <h4 class="code" id="f-sget">sget(x, y) <br />sset(x, y, [c])</h4>
+        <h4 class="code" id="f-sget">
+          sget(x, y) -> number <br />sset(x, y, [c])
+        </h4>
         <p>
           Returns or sets the color <code>c</code> of the pixel at coordinates
           <code>x,y</code> of the spritesheet. If you don't specify color, the
           current draw color is used.
         </p>
         <h4 class="code" id="f-fget">
-          fget(sprite, flagNumber) <br />fset(sprite, flagNumber, [c])
+          fget(sprite, flagNumber) -> boolean <br />fset(sprite, flagNumber,
+          [c])
         </h4>
         <p>
           Returns or sets the color <code>c</code> of the pixel at coordinates
@@ -166,13 +180,68 @@
           <code>x0,y0</code> and bottom right corner at <code>x1,y1</code>, in
           color <code>c</code> (or current draw color).
         </p>
-        <h4 class="code" id="f-rect">
-          rect(x0, y0, x1, y1, [c])<br />rectfill(x0, y0, x1, y1, [c])
+        <h4 class="code" id="f-pal">pal(c0, c1)</h4>
+        <p>
+          Swaps color <code>c0</code> in the current palette with
+          <code>c1</code> from original palette. If called with no arguments,
+          resets the palette to the initial state, including transparency data.
+        </p>
+        <h4 class="code" id="f-palt">palt(col, val)</h4>
+        <p>
+          Sets the transparency flag of color <code>col</code> in the current
+          palette to <code>val</code> (a boolean value). If called with no
+          arguments, resets the transparency data to initial state (i.e. color
+          number 5 is transparent).
+        </p>
+        <h4 class="code" id="f-spr">
+          spr(index, x, y, w = 1, h = 1, flipX = false, flipY = false)
         </h4>
         <p>
-          Draws a rectangle (or filled rectangle) with its top left corner at
-          <code>x0,y0</code> and bottom right corner at <code>x1,y1</code>, in
-          color <code>c</code> (or current draw color).
+          Draws sprite at <code>index</code> to coordinates <code>x, y</code>.
+          If <code>w</code> and/or <code>h</code> are specified, it will draw a
+          region from the spritesheet which is <code>w</code> sprites wide and
+          <code>h</code> sprites high. The <code>flipX, flipY</code> flags will
+          flip the drawn image horizontally or vertically (respectively) when
+          set to <code>true</code>.
+        </p>
+
+        <h3>Input</h3>
+        <h4 class="code" id="f-btn">btn(key) -> boolean</h4>
+        <p>
+          Returns the boolean state of button no. <code>key</code>. Instead of
+          using numbers, you can pass one of predefined constants provided by
+          JBox:
+
+          <span><code>BTN_LEFT = 0</code></span>
+          <span><code>BTN_UP = 1</code></span>
+          <span><code>BTN_RIGHT = 2</code></span>
+          <span><code>BTN_DOWN = 3</code></span>
+          <span><code>BTN_A = 4</code></span>
+          <span><code>BTN_B = 5</code></span>
+          <span><code>BTN_START = 6</code></span>
+          <span><code>BTN_SELECT = 7</code></span>
+
+          Directional buttons are mapped to arrow keys, a is mapped to either z
+          or c, b is mapped to x, start is escape and select is tab. If you
+          connect a gamepad, it should also be detected and the button layout
+          should be reasonable.
+        </p>
+        <h4 class="code" id="f-btnp">btnp(key) -> boolean</h4>
+        <p>
+          Returns the state of button no. <code>key</code>, if it has just been
+          pressed. If the button is held down, it will only return true once,
+          and then return false on subsequent frames.
+        </p>
+        <h3>Audio</h3>
+        <h4 class="code" id="f-sfx">sfx(index)</h4>
+        <p>Plays the sound no. <code>index</code>.</p>
+        <h3>Map</h3>
+        <h4 class="code" id="f-mget">
+          mget(x, y) -> number <br />mset(x, y, v)
+        </h4>
+        <p>
+          Returns or sets the sprite value <code>v</code> at map coordinates
+          <code>x,y</code>.
         </p>
         <h4 class="code" id="f-map">
           map(celX = 0, celY = 0, x = 0, y = 0, w = 127, h = 127)
@@ -185,16 +254,79 @@
           from the top left corner of the screen.
         </p>
       </section>
+      <section class="faq">
+        <h3>FAQ</h3>
+        <ul>
+          <li>
+            <h4 class="question">Isn't there a music api?</h4>
+            <p class="answer">
+              I haven't figured out how to make a tracker yet. I'm still very
+              new to the web audio API, and it's pretty scary. That said, it's
+              just Javascript. You can play any sound or music file you like
+              using whatever technique or library you want. I might extend JBox
+              with the capability to do just that, but I think I'd rather learn
+              how to make a tracker instead.
+            </p>
+          </li>
+          <li>
+            <h4 class="question">Why only six colors?</h4>
+            <p class="answer">
+              I like this specific palette. And I also suffer from protanopia,
+              so I like limited sets of colors which I can easily tell from one
+              another.
+            </p>
+          </li>
+          <li>
+            <h4 class="question">
+              What about peeks and pokes and other stuff that's in Pico-8 and
+              isn't here?
+            </h4>
+            <p class="answer">
+              This is not a fantasy console. It's just a Javascript library
+              that's fantasy-console-like. There's no underlying machine
+              architecture and no fake chips powering this thing. I wanted a
+              simple way to rapidly create tiny games in Javascript and I liked
+              the Pico-8 API. And this is the result.
+            </p>
+          </li>
+          <li>
+            <h4 class="question">
+              It's horrible and I hate it! What can I do?
+            </h4>
+            <p class="answer">Go somewhere else.</p>
+          </li>
+          <li>
+            <h4 class="question">It's awesome and I love it! What can I do?</h4>
+            <p class="answer">
+              Make an awesome game, upload it somewhere and tell me about it!
+              You can hit me up on twitter via the link in the footer.
+            </p>
+          </li>
+          <li>
+            <h4 class="question">Any future plans?</h4>
+            <p class="answer">
+              Make a standalone editor in electron so that you can use if
+              offline. Get a music tracker running. Figure out how to include a
+              code editor within the app so that you don't even have to go
+              outside. Figure out how to spit out an electron app with the game,
+              so you can export to desktop, as well as the web. This will
+              probably take years, but it's something to shoot for.
+            </p>
+          </li>
+        </ul>
+      </section>
     </main>
     <footer class="footer">
       <nav class="footer-nav">
         <ul>
+          <li><a href="/">President's homepage</a></li>
           <li>
             <a href="https://github.com/matzieq/JBOX">Source on github</a>
           </li>
           <li>
             <a href="https://twitter.com/matzieq">Twitter</a>
           </li>
+          <li><a href="https://matzieq.itch.io">Itch</a></li>
         </ul>
       </nav>
     </footer>
