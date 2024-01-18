@@ -1,7 +1,7 @@
 var jboxString = `/* eslint-disable */
 
 /**
- * JBOX version 0.1.0 by President of Space
+ * JBOX version 0.2.0 by President of Space
  *
  * "private" values and methods are marked with a preceding underscore
  * but it's just JS, so there's nothing I can (or want to) do to stop you
@@ -444,7 +444,6 @@ jb.init = function (config) {
   this._actx = new AudioContext();
 
   this._jbctx.imageSmoothingEnabled = false;
-
 
   document.body.appendChild(this._jbcanv);
   

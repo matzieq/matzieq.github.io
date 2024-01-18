@@ -11,6 +11,8 @@ JBox is a tiny library and asset editor for equally tiny games. In the current v
 - <s>Downloading project template in the app</s>
 - <s>Documentation</s>
 - <s>Main website for the project</s>
+- <s>Initial pass on a code editor</s>
+- <s>Export game as a single html file</s>
 - Tutorial
 - Sample games
 - Some kind of music tracker
