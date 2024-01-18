@@ -2,6 +2,8 @@ fixAudioContext(window);
 
 let appDataState = initialDataState;
 
+console.log("bubełe");
+
 // const spriteEdit = SpriteEdit(appDataState);
 
 const appEditState = {
@@ -74,6 +76,7 @@ modal.onCancelClick = function () {};
 const sections = document.querySelectorAll(".section");
 const controlButtons = document.querySelectorAll(".control-button");
 const downloadButton = document.querySelector(".download-button");
+const exportButton = document.querySelector(".export-button");
 const clearButton = document.querySelector(".clear-button");
 const fileInput = document.querySelector("#import-data-file");
 const toolButtons = document.querySelectorAll(".tool-button");
@@ -126,6 +129,38 @@ const nextSoundButton = document.querySelector(".sound-next");
 const prevSoundButton = document.querySelector(".sound-prev");
 const soundDisplay = document.querySelector(".sound-number");
 
+/**
+ * GAME CODE STUFF
+ */
+
+const highlight = editor => {
+  editor.innerHTML = Prism.highlight(
+    editor.textContent ?? "",
+    Prism.languages.javascript,
+    "javascript"
+  );
+};
+
+const jar = CodeJar(document.querySelector(".editor"), highlight);
+
+console.log({ jar });
+
+jar.onUpdate(code => {
+  localStorage.setItem("JBOX_GAME_CODE", code);
+  window.jb = jb || {};
+  window.cancelAnimationFrame(jb._frameRequestId);
+  window.jb._data = [
+    {
+      sprites: appDataState.sprites.flat(2),
+      spriteFlags: appDataState.spriteFlags,
+      map: appDataState.tileMap.flat(2),
+      sfx: appDataState.sfx,
+    },
+  ];
+
+  eval(code);
+});
+
 //#endregion
 
 /**
@@ -174,6 +209,14 @@ function getMovingYouInfernalMachine() {
 
   const appData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
+  if (localStorage.getItem("JBOX_GAME_CODE")) {
+    const gameCode = localStorage.getItem("JBOX_GAME_CODE");
+    console.log({ gameCode });
+    if (gameCode) {
+      jar.updateCode(gameCode);
+    }
+  }
+
   if (appData) {
     appDataState = appData;
   }
@@ -181,8 +224,39 @@ function getMovingYouInfernalMachine() {
   initDrawingSurfaces();
 }
 
+function exportGame() {
+  const gameDataString = `var jb = jb || {}; jb._data = jb._data || []; jb._data.push(${JSON.stringify(
+    {
+      sprites: appDataState.sprites.flat(2),
+      spriteFlags: appDataState.spriteFlags,
+      map: appDataState.tileMap.flat(2),
+      sfx: appDataState.sfx,
+    }
+  )});`;
+
+  const gameCodeString = localStorage.getItem("JBOX_GAME_CODE");
+
+  console.log({ gameCodeString });
+
+  download(
+    "index.html",
+    getDownloadHtml("Game", gameDataString, gameCodeString)
+  );
+}
+
 function attachControlListeners() {
   downloadButton.addEventListener("click", () => {
+    localStorage.setItem(
+      "JBOX_GAME_DATA",
+      `var jb = jb || {}; jb._data = jb._data || []; jb._data.push(${JSON.stringify(
+        {
+          sprites: appDataState.sprites.flat(2),
+          spriteFlags: appDataState.spriteFlags,
+          map: appDataState.tileMap.flat(2),
+          sfx: appDataState.sfx,
+        }
+      )});`
+    );
     download(
       "data.js",
       `var jb = jb || {}; jb._data = jb._data || []; jb._data.push(${JSON.stringify(
@@ -196,6 +270,8 @@ function attachControlListeners() {
     );
   });
 
+  exportButton.addEventListener("click", exportGame);
+
   clearButton.addEventListener("click", () => {
     modal.open({
       onOkcayClick: () => {
@@ -205,8 +281,7 @@ function attachControlListeners() {
         saveData();
       },
 
-      text:
-        "This will erase all current project data and start a new project from scratch.",
+      text: "This will erase all current project data and start a new project from scratch.",
     });
   });
 
@@ -270,8 +345,7 @@ function attachControlListeners() {
 
       reader.addEventListener("load", () => {
         modal.open({
-          text:
-            "This will erase current project data and replace it with new data",
+          text: "This will erase current project data and replace it with new data",
           onOkcayClick: () => {
             try {
               const index = reader.result.indexOf('{"sprites');
@@ -516,12 +590,8 @@ function updateDrawingSurface(spriteIndex) {
 }
 
 function drawOnMap({ x, y }) {
-  const {
-    isDrawing,
-    drawingMode,
-    selectedImage,
-    selectedScreen,
-  } = appEditState;
+  const { isDrawing, drawingMode, selectedImage, selectedScreen } =
+    appEditState;
   if (isDrawing) {
     const mapX = Math.floor(x / 32);
     const mapY = Math.floor(y / 32);

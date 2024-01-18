@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="prism.css" />
   </head>
   <body>
     <header class="header">
@@ -37,6 +38,9 @@
           <li>
             <button class="btn btn-file download-button">SAVE</button>
           </li>
+          <li>
+            <button class="btn btn-file export-button">EXPORT</button>
+          </li>
           <li></li>
         </ul>
         <ul>
@@ -55,6 +59,11 @@
           </li>
           <li>
             <button class="btn control-button" data-activate="SFX">SFX</button>
+          </li>
+          <li>
+            <button class="btn control-button" data-activate="GAME">
+              GAME
+            </button>
           </li>
         </ul>
       </section>
@@ -132,7 +141,7 @@
             <canvas class="sprite-preview" width="320" height="320"></canvas>
             <div class="sprite-number-wrapper">
               <h2 class="item-set-label">SPRITE:</h2>
-              <span class="number sprite-number">1</span>
+              <span class="jb-number sprite-number">1</span>
             </div>
             <div class="page-select">
               <h2 class="item-set-label">SPRITESHEET:&nbsp;</h2>
@@ -157,35 +166,35 @@
           <div class="checkbox-group sprite-flags">
             <span class="item-set-label">FLAGS</span>
             <div class="checkbox-wrapper">
-              <label class="number" for="f0">0 </label
+              <label class="jb-number" for="f0">0 </label
               ><input type="checkbox" name="f0" id="f0" data-flag="0" />
             </div>
             <div class="checkbox-wrapper">
-              <label class="number" for="f0">1 </label
+              <label class="jb-number" for="f0">1 </label
               ><input type="checkbox" name="f1" id="f1" data-flag="1" />
             </div>
             <div class="checkbox-wrapper">
-              <label class="number" for="f0">2 </label
+              <label class="jb-number" for="f0">2 </label
               ><input type="checkbox" name="f2" id="f2" data-flag="2" />
             </div>
             <div class="checkbox-wrapper">
-              <label class="number" for="f0">3 </label
+              <label class="jb-number" for="f0">3 </label
               ><input type="checkbox" name="f3" id="f3" data-flag="3" />
             </div>
             <div class="checkbox-wrapper">
-              <label class="number" for="f0">4 </label
+              <label class="jb-number" for="f0">4 </label
               ><input type="checkbox" name="f4" id="f4" data-flag="4" />
             </div>
             <div class="checkbox-wrapper">
-              <label class="number" for="f0">5 </label
+              <label class="jb-number" for="f0">5 </label
               ><input type="checkbox" name="f5" id="f5" data-flag="5" />
             </div>
             <div class="checkbox-wrapper">
-              <label class="number" for="f0">6 </label
+              <label class="jb-number" for="f0">6 </label
               ><input type="checkbox" name="f6" id="f6" data-flag="6" />
             </div>
             <div class="checkbox-wrapper">
-              <label class="number" for="f0">7 </label
+              <label class="jb-number" for="f0">7 </label
               ><input type="checkbox" name="f7" id="f7" data-flag="7" />
             </div>
           </div>
@@ -223,16 +232,16 @@
             ></canvas>
             <div class="sprite-number-wrapper">
               <h2 class="item-set-label">COORDS:</h2>
-              <span class="number tilemap-x">1</span>
-              <span class="number">,</span>
-              <span class="number tilemap-y">1</span>
+              <span class="jb-number tilemap-x">1</span>
+              <span class="jb-number">,</span>
+              <span class="jb-number tilemap-y">1</span>
             </div>
           </div>
           <div class="sprite-list-wrapper">
             <canvas class="sprite-list" width="320" height="320"></canvas>
             <div class="sprite-number-wrapper">
               <h2 class="item-set-label">SPRITE:</h2>
-              <span class="number sprite-number">1</span>
+              <span class="jb-number sprite-number">1</span>
             </div>
             <div class="page-select">
               <h2 class="item-set-label">SPRITESHEET:&nbsp;</h2>
@@ -281,7 +290,7 @@
             >
               -
             </button>
-            <span class="tempo-number number">1</span>
+            <span class="tempo-number jb-number">1</span>
             <button
               class="btn btn-active btn-small tempo-button tempo-increase"
             >
@@ -294,7 +303,7 @@
             <button class="btn btn-active btn-small sound-button sound-prev">
               -
             </button>
-            <span class="sound-number number">1</span>
+            <span class="sound-number jb-number">1</span>
             <button class="btn btn-active btn-small sound-button sound-next">
               +
             </button>
@@ -337,6 +346,12 @@
           <button class="btn btn-active play-button">PLAY</button>
         </div>
       </section>
+      <section id="GAME" class="section game-edit">
+        <div class="game-edit-wrapper">
+          <div class="editor"></div>
+          <div class="board"></div>
+        </div>
+      </section>
       <div class="modal-overlay">
         <div class="modal">
           <div class="modal-text-wrapper">
@@ -354,6 +369,10 @@
         >
       </button>
     </main>
+    <script src="src/downloadComponents.js"></script>
+    <script src="../jbox-lib/jbox.js"></script>
+    <script src="src/codejar.js"></script>
+    <script src="src/prism.js"></script>
     <script src="src/audioContextPatch.js"></script>
     <script src="src/constants.js"></script>
     <script src="src/data.js"></script>

@@ -226,7 +226,7 @@ canvas {
   font-weight: 400;
 }
 
-.number {
+.jb-number {
   display: inline-block;
   padding: 0 10px;
   font-size: 1.5rem;
@@ -315,4 +315,56 @@ canvas {
 
 .modal .modal-text {
   font-size: 2rem;
+}
+
+
+.editor {
+  border: 1px solid #fbf5ef;
+  margin-right: 20px;
+  min-width: 50%;
+  font-family: monospace;
+  font-size: 1.2rem;
+}
+
+.editor * {
+  font-family: monospace;
+
+}
+
+.editor {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 18px;
+  font-weight: 400;
+  height: 340px;
+  letter-spacing: normal;
+  line-height: 20px;
+  padding: 10px;
+  tab-size: 4;
+}
+
+.editor .token.keyword {
+  color: #f2d3ab;
+}
+.editor .token.punctuation {
+  color: #c69fa5;
+}
+
+.editor .token.function {
+  color: #8b6d9c;
+}
+.editor .token.number,
+.editor .token.string {
+  color: #f2d3ab;
+}
+.editor .token.comment {
+  color: #494d7e;
+}
+
+.game-edit-wrapper {
+  display: flex;
+}
+
+.board {
+  max-width: 512px;
+  max-height: 512px;
 }

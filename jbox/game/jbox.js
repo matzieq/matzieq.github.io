@@ -1,7 +1,5 @@
-/* eslint-disable */
-
 /**
- * JBOX version 0.1.0 by President of Space
+ * JBOX version 0.01 by President of Space
  *
  * "private" values and methods are marked with a preceding underscore
  * but it's just JS, so there's nothing I can (or want to) do to stop you
@@ -450,16 +448,25 @@ jb.init = function (config) {
   );
 
   if (el) {
-    el.innerHTML = "";
     el.appendChild(this._jbcanv);
   } else {
     document.body.appendChild(this._jbcanv);
   }
+  // document.body.appendChild(this._jbcanv);
   this._draw = config && config.draw ? config.draw : function () {};
   this._update = config && config.update ? config.update : function () {};
   const style = document.createElement("style");
 
   style.textContent = `
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #000;
+    }
+
     canvas {
       display: block;
       margin: 0 auto;
@@ -484,20 +491,16 @@ jb.init = function (config) {
   window.requestAnimationFrame(t => this._step(t));
 
   if (config && typeof config.init === "function") {
-    try {
-      config.init();
-    } catch (err) {
-      console.error(err);
-    }
+    config.init();
   }
 };
 
 jb._fitToScreen = function () {
   if (window.innerWidth > window.innerHeight) {
-    this._jbcanv.style.height = "50vh";
+    this._jbcanv.style.height = "100vh";
     this._jbcanv.style.width = "auto";
   } else {
-    this._jbcanv.style.width = "100%";
+    this._jbcanv.style.width = "100vw";
     this._jbcanv.style.height = "auto";
   }
 };
@@ -509,18 +512,13 @@ jb._step = function (timestamp) {
   const _dt = timestamp - this._lastFrame;
 
   this._frameRate = 1000 / _dt;
-
   this._lastFrame = timestamp;
   this._readGamepadState();
-  try {
-    this._update(_dt / 1000);
-    this._draw();
-    this._jbctx.putImageData(this._screenBuffer, 0, 0);
-    this._frameRequestId = window.requestAnimationFrame(t => this._step(t));
-  } catch (err) {
-    console.error(err);
-    window.cancelAnimationFrame(this._frameRequestId);
-  }
+  this._update(_dt / 1000);
+  this._draw();
+  this._jbctx.putImageData(this._screenBuffer, 0, 0);
+
+  window.requestAnimationFrame(t => this._step(t));
 };
 
 jb._readGamepadState = function () {

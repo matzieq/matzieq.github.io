@@ -1,4 +1,4 @@
-/* eslint-disable */
+var jboxString = `/* eslint-disable */
 
 /**
  * JBOX version 0.1.0 by President of Space
@@ -445,28 +445,21 @@ jb.init = function (config) {
 
   this._jbctx.imageSmoothingEnabled = false;
 
-  const el = document.querySelector(
-    config && config.element ? `.${config.element}` : ".board"
-  );
 
-  if (el) {
-    el.innerHTML = "";
-    el.appendChild(this._jbcanv);
-  } else {
-    document.body.appendChild(this._jbcanv);
-  }
+  document.body.appendChild(this._jbcanv);
+  
   this._draw = config && config.draw ? config.draw : function () {};
   this._update = config && config.update ? config.update : function () {};
   const style = document.createElement("style");
 
-  style.textContent = `
+  style.textContent = \`
     canvas {
       display: block;
       margin: 0 auto;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
     }
-  `;
+  \`;
 
   document.head.appendChild(style);
 
@@ -1481,3 +1474,22 @@ jb.line = function (_x0, _y0, _x1, _y1, col = this._drawColor) {
     }
   }
 };
+`;
+
+function getDownloadHtml(gameTitle, dataString, gameString) {
+  return `
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>${gameTitle}</title>
+    </head>
+    <body>
+      <script>${jboxString}</script>
+      <script>${dataString}</script>
+      <script>${gameString}</script>
+    </body>
+  </html>
+`;
+}
