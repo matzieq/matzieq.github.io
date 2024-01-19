@@ -1,6 +1,6 @@
-# JBox
+# Sparky
 
-JBox is a tiny library and asset editor for equally tiny games. In the current version you can edit sprites, tilemaps and sound effects, export them as a data file, and develop games using the (incomplete) library. The software is free and open source, provided under the MIT license, which means you can do pretty much whatever you want with it, provided that you attach to it a copy of the license and copyright notice.
+Sparky is a tiny library and asset editor for equally tiny games. In the current version you can edit sprites, tilemaps and sound effects, export them as a data file, and develop games using the (incomplete) library. The software is free and open source, provided under the MIT license, which means you can do pretty much whatever you want with it, provided that you attach to it a copy of the license and copyright notice.
 
 ## Roadmap
 
@@ -31,9 +31,9 @@ JBox is a tiny library and asset editor for equally tiny games. In the current v
 
 #### `init(config)`
 
-Creates a JBox game.
+Creates a Sparky game.
 
-- **`config`** - configuration object used by JBox to create a game loop. The accepted fields are:
+- **`config`** - configuration object used by Sparky to create a game loop. The accepted fields are:
 - **`init()`** - function that runs once at the beginning of the game
 - **`draw()`** - function that runs every frame before the screen buffer is drawn to the canvas
 - **`update(dt)`** - function that runs every frame after the screen buffer is drawn to the canvas. The `dt` parameter is the amount of time (in seconds) that elapsed since the last frame
@@ -54,7 +54,7 @@ Returns or sets the color `c` of the pixel at coordinates `x,y` of the spriteshe
 
 #### `print(str, x, y, [c])`
 
-Prints the string `str` to coordinates `x,y` in color `c` (or current draw color if that is not specified). JBox has no concept of "cursor", therefore you must always provide coordinates to draw text. All characters in JBox's font are three pixels wide and five pixels tall.
+Prints the string `str` to coordinates `x,y` in color `c` (or current draw color if that is not specified). Sparky has no concept of "cursor", therefore you must always provide coordinates to draw text. All characters in Sparky's font are three pixels wide and five pixels tall.
 
 #### `color(c = 0)`
 
@@ -96,7 +96,7 @@ Draws sprite at `index` to coordinates `x, y`. If `w` and/or `h` are specified, 
 
 #### `btn(key) -> boolean`
 
-Returns the boolean state of button no. `key`. Instead of using numbers, you can pass one of predefined constants provided by JBox:
+Returns the boolean state of button no. `key`. Instead of using numbers, you can pass one of predefined constants provided by Sparky:
 
 - `BTN_LEFT = 0`
 - `BTN_UP = 1`
@@ -133,7 +133,7 @@ Draws the map starting from cell coordinates `celX` and `celY`, at screen coordi
 
 - #### Isn't there a music api?
 
-  I haven't figured out how to make a tracker yet. I'm still very new to the web audio API, and it's pretty scary. That said, it's just Javascript. You can play any sound or music file you like using whatever technique or library you want. I might extend JBox with the capability to do just that, but I think I'd rather learn how to make a tracker instead.
+  I haven't figured out how to make a tracker yet. I'm still very new to the web audio API, and it's pretty scary. That said, it's just Javascript. You can play any sound or music file you like using whatever technique or library you want. I might extend Sparky with the capability to do just that, but I think I'd rather learn how to make a tracker instead.
 
 - #### Why only six colors?
 
@@ -156,6 +156,6 @@ Draws the map starting from cell coordinates `celX` and `celY`, at screen coordi
   Make a standalone editor in electron so that you can use if offline. Get a music tracker running. Figure out how to include a code editor within the app so that you don't even have to go outside. Figure out how to spit out an electron app with the game, so you can export to desktop, as well as the web. This will probably take years, but it's something to shoot for.
 
 [President's homepage](https://matzieq.github.io)
-[Source on github](https://github.com/matzieq/JBOX)
+[Source on github](https://github.com/matzieq/Sparky)
 [Twitter](https://twitter.com/matzieq)
 [Itch](https://matzieq.itch.io)

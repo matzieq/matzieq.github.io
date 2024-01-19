@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sparky Homepage</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="editor/style.css" />
+  </head>
+  <body>
+    <header class="header header-main">
+      <a href="/sparky"><h1>Sparky</h1></a>
+      <nav class="navbar">
+        <ul>
+          <li><a href="/sparky/editor/">Editor</a></li>
+          <li><a href="/sparky/learn/">Learn</a></li>
+          <li><a href="/sparky/documentation">Documentation</a></li>
+          <li><a href="/sparky/about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="app-content">
+      <section class="info">
+        <div class="container">
+          <p class="alpha-warning">
+            <em
+              >Thank you for checking out sparky! Just a quick heads up: sparky
+              is in an early stage of development. It's fully functional, but
+              may include rough edges and bugs. It is, however updated
+              (reasonably) often, and updated a lot, so these keep disappearing
+              even as I write these words.
+            </em>
+          </p>
+          <h2 class="subheader">
+            sparky is a set of simple open source tools to create<br />
+            tiny web games in Javascript
+          </h2>
+          <img src="assets/images/game.png" alt="Game screenshot" />
+          <p>
+            sparky is inspired by Pico-8, the Pyxel Engine and similar fantasy
+            consoles and fantasy-console-likes. It provides a simple set of
+            tools to draw sprites, tilemaps and create sounds, along with a tiny
+            Javascript library with API modelled after the Pico-8.
+          </p>
+          <div class="info-box">
+            <h3>Simple and easy to use</h3>
+            <p>
+              The tools are simple and the setup is minimal. All you need is a
+              browser and a text editor. You'll be up and running in minutes.
+            </p>
+            <h3>Constraints to fuel creativity...</h3>
+            <p>
+              Taking inspiration from fantasy consoles, sparky provides you with
+              limited resources to work with. This way it's hard to get too
+              carried away, and you can finish your game quickly.
+            </p>
+            <h3>...but you can cheat!</h3>
+            <p>
+              sparky is just a library, so it does not impose any code
+              limitations. You can also include multiple sets of assets if you
+              really want.
+            </p>
+            <h3>It's just plain Javascript</h3>
+            <p>
+              No complex build tools or advanced features. Simply plug in the
+              library in a script tag, along with the data generated from the
+              editor and your own code, just like in the olden days.
+            </p>
+            <h3>Batteries included</h3>
+            <p>
+              sparky gives you all the tools you need to create tiny pixel art
+              games. The game editor allows you to create assets and save them
+              on your machine. The library provides basic functions for display,
+              input, sounds and a game loop.
+            </p>
+            <h3>It's really tiny</h3>
+            <p>
+              Depending on how much stuff you cram in, the library together with
+              the assets can take as little as 6kB zipped. You can totally use
+              it for a
+              <a href="http://js13kgames.com/">Js13k jam</a>!
+            </p>
+            <h3>...and it's open source</h3>
+            <p>
+              Every last bit of code, including this website, is free software,
+              licensed under the MIT licence. So pop the hood and hack away to
+              your heart's content.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="info editor-info">
+        <div class="container">
+          <h2>Game editor</h2>
+          <p>
+            Use the editor to create images, maps and sounds for your game. The
+            data is saved as a javascript file that you just embed into your
+            HTML together with the library and your own code.
+          </p>
+          <div class="info-box">
+            <h3>Use the sprite editor to draw your sprites</h3>
+            <img
+              src="assets/images/sprite-editor.png"
+              alt="Sprite editor screenshot"
+            />
+            <p>
+              You get a total of 256 8x8 pixel sprites and a 6 color palette.
+              You can then draw them in your game by simply referring to their
+              numbers.
+            </p>
+            <h3>
+              Use the tilemap editor to create maps using the sprites you've
+              drawn
+            </h3>
+            <img
+              src="assets/images/tile-editor.png"
+              alt="Tilemap editor screenshot"
+            />
+            <p>
+              You get a total of 8x8 screens of 16x16 tiles. Use the sprites
+              you've drawn in the sprite editor to fill your maps. You can also
+              change the map programmatically in game code by simply referring
+              to tile coordinates. Drawing a map in your game is as simple as
+              <span class="code">map()</span>.
+            </p>
+            <h3>Use the SFX editor to make bleeps and bloops</h3>
+            <img
+              src="assets/images/sfx-editor.png"
+              alt="SFX editor screenshot"
+            />
+            <p>
+              You can make 32 sound effects, each consisting of 32 segments.
+              There are several waveforms and special effects to spice things
+              up. You can also make some simple music in the editor, although a
+              more advanced tracker-like music editor is in the works as we
+              speak.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="info library-info">
+        <div class="container">
+          <h2>Library</h2>
+          <p>
+            The sparky library is just a bunch of functions to make it as easy
+            and painless as possible to display things on the screen, read input
+            and make some noise. It abstracts away the chores and many decisions
+            that would lead to analysis paralysis. All games use a 128x128
+            resolution, a fixed 6 color palette and a limited set of resources
+            you create in the editor. This way it takes very little code to get
+            up and running.
+          </p>
+          <div class="image-wrapper">
+            <img src="assets/images/code.png" alt="Code sample" />
+            <img
+              src="assets/images/screenshot.png"
+              alt="Display created with the code"
+            />
+          </div>
+          <p>
+            It's just Javascript, so you can use any sort of library and built
+            in functionality you wish. The opportunities for creativity are
+            endless.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="/">President's homepage</a></li>
+          <li>
+            <a href="https://github.com/matzieq/sparky">Source on github</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/matzieq">Twitter</a>
+          </li>
+          <li><a href="https://matzieq.itch.io">Itch</a></li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
