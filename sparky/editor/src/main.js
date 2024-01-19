@@ -1025,6 +1025,8 @@ function runGame() {
       console.log({ err });
     }
   }
+
+  runGameButton.classList.add('btn-active');
 }
 
 function stopGame() {
@@ -1032,6 +1034,7 @@ function stopGame() {
   window.cancelAnimationFrame(sparky._frameRequestId);
   window.sparky._data = [];
   window.sparky.init();
+  runGameButton.classList.remove('btn-active');
 }
 
 function stringifyGameData() {

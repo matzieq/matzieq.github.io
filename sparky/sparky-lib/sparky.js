@@ -577,10 +577,10 @@ sparky.init = function (config) {
   );
 
   window.addEventListener("resize", () => this._fitToScreen());
-  window.addEventListener("keydown", e => this._onKeyPressed(e));
-  window.addEventListener("keyup", e => this._onKeyReleased(e));
+  window.addEventListener("keydown", (e) => this._onKeyPressed(e));
+  window.addEventListener("keyup", (e) => this._onKeyReleased(e));
 
-  window.requestAnimationFrame(t => this._step(t));
+  window.requestAnimationFrame((t) => this._step(t));
 
   if (config && typeof config.init === "function") {
     try {
@@ -655,7 +655,7 @@ sparky._step = function (timestamp) {
     this._update(_dt / 1000);
     this._draw();
     this._sparkyctx.putImageData(this._screenBuffer, 0, 0);
-    this._frameRequestId = window.requestAnimationFrame(t => this._step(t));
+    this._frameRequestId = window.requestAnimationFrame((t) => this._step(t));
   } catch (err) {
     console.error(err);
     window.cancelAnimationFrame(this._frameRequestId);
@@ -878,10 +878,10 @@ sparky.print = function (_str, _x, _y, col = this._drawColor) {
   }
 
   let currX = 0;
-  needed.forEach(letter => {
+  needed.forEach((letter) => {
     let currY = 0;
     let addX = 0;
-    letter.forEach(row => {
+    letter.forEach((row) => {
       row.forEach((pixel, stringX) => {
         if (pixel) {
           this._updatePixel(
@@ -1145,7 +1145,7 @@ sparky.pget = function (x, y) {
     const [r, g, b] = this._screenBuffer.data.slice(pIndex, pIndex + 4);
 
     return this._rgbPal.findIndex(
-      col => col[0] === r && col[1] === g && col[2] === b
+      (col) => col[0] === r && col[1] === g && col[2] === b
     );
   } else {
     return "";
@@ -1165,6 +1165,8 @@ sparky._resetKeys = function () {
 };
 
 sparky._onKeyPressed = function (e) {
+  e.stopPropagation();
+  console.log({ e });
   this._actx.resume();
   switch (e.key.toLowerCase()) {
     case "arrowup":
@@ -1209,6 +1211,7 @@ sparky._onKeyPressed = function (e) {
 };
 
 sparky._onKeyReleased = function (e) {
+  e.stopPropagation();
   switch (e.key) {
     case "ArrowUp":
       this._keys.up.pressed = false;
@@ -1561,7 +1564,7 @@ sparky._createImageData = function () {
     );
 
     const imgArray = sprite
-      .map(pixel => {
+      .map((pixel) => {
         const alpha = this._transparent[pixel] ? 0 : 255;
         const rgbPixel = [...this._rgbPal[pixel], alpha];
 

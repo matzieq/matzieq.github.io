@@ -6,8 +6,14 @@
 .header,
 .controls {
   max-width: 1600px;
-  padding: 36px;
+  padding: 12px;
   margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header ul,
@@ -25,7 +31,7 @@
 }
 
 .controls .btn-group.project-buttons {
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .controls .btn.btn-file {
@@ -45,6 +51,7 @@
 }
 
 .section {
+  max-width: 1600px;
   display: none;
 }
 
@@ -80,11 +87,11 @@
   background: none;
   outline: none;
   border: 1px solid #8b6d9c;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #8b6d9c;
-  padding: 10px;
+  padding: 6px 10px;
   cursor: pointer;
-  min-width: 220px;
+  min-width: 160px;
   display: inline-block;
   text-align: center;
   border-radius: 0;
@@ -92,7 +99,7 @@
 
 .btn.control-button {
   border: none;
-  padding: 10px 30px;
+  padding: 8px 16px;
 }
 
 .btn.btn-active {
@@ -220,7 +227,7 @@ canvas {
 }
 
 .item-set-label {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   min-width: 100px;
   display: inline-block;
   font-weight: 400;
@@ -229,7 +236,7 @@ canvas {
 .sparky-number {
   display: inline-block;
   padding: 0 10px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .sprite-flags {
@@ -311,6 +318,11 @@ canvas {
 .modal .btn-group {
   display: flex;
   justify-content: space-between;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
 }
 
 .modal .modal-text {

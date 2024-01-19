@@ -29,19 +29,25 @@
       <section class="controls">
         <ul class="btn-group project-buttons">
           <li>
-            <button class="btn btn-file clear-button">NEW</button>
+            <button class="btn btn-file clear-button">New</button>
           </li>
           <li>
-            <label for="import-data-file" class="btn btn-file">OPEN</label>
+            <label for="import-data-file" class="btn btn-file">Open</label>
             <input type="file" id="import-data-file" value="LOAD" />
           </li>
           <li>
-            <button class="btn btn-file download-button">SAVE</button>
+            <button class="btn btn-file download-button">Save</button>
           </li>
           <li>
-            <button class="btn btn-file export-button">EXPORT</button>
+            <button class="btn btn-file export-button">Export</button>
           </li>
-          <li></li>
+          <li>
+            <button class="btn btn-file btn-active download-button">
+              <a href="/sparky/sparky-lib/sparky-template.zip"
+                >Get template</a
+              >
+            </button>
+          </li>
         </ul>
         <ul>
           <li>
@@ -49,23 +55,24 @@
               class="btn btn-active control-button"
               data-activate="SPRITE"
             >
-              SPRITESHEET
+              sprites
             </button>
           </li>
           <li>
             <button class="btn control-button" data-activate="TILEMAP">
-              TILEMAP
+              map
             </button>
           </li>
           <li>
-            <button class="btn control-button" data-activate="SFX">SFX</button>
+            <button class="btn control-button" data-activate="SFX">sound</button>
           </li>
           <li>
             <button class="btn control-button" data-activate="GAME">
-              GAME
+              code
             </button>
           </li>
         </ul>
+
       </section>
 
       <section id="SPRITE" class="sprite-edit section section-active">
@@ -140,11 +147,11 @@
           <div class="sprite-preview-wrapper">
             <canvas class="sprite-preview" width="320" height="320"></canvas>
             <div class="sprite-number-wrapper">
-              <h2 class="item-set-label">SPRITE:</h2>
+              <h2 class="item-set-label">Sprite:</h2>
               <span class="sparky-number sprite-number">1</span>
             </div>
             <div class="page-select">
-              <h2 class="item-set-label">SPRITESHEET:&nbsp;</h2>
+              <h2 class="item-set-label">Sheet:&nbsp;</h2>
 
               <button
                 class="btn btn-small btn-active page-button"
@@ -164,7 +171,7 @@
             </div>
           </div>
           <div class="checkbox-group sprite-flags">
-            <span class="item-set-label">FLAGS</span>
+            <span class="item-set-label">Flags</span>
             <div class="checkbox-wrapper">
               <label class="sparky-number" for="f0">0 </label
               ><input type="checkbox" name="f0" id="f0" data-flag="0" />
@@ -231,7 +238,7 @@
               height="512"
             ></canvas>
             <div class="sprite-number-wrapper">
-              <h2 class="item-set-label">COORDS:</h2>
+              <h2 class="item-set-label">Coords:</h2>
               <span class="sparky-number tilemap-x">1</span>
               <span class="sparky-number">,</span>
               <span class="sparky-number tilemap-y">1</span>
@@ -240,11 +247,11 @@
           <div class="sprite-list-wrapper">
             <canvas class="sprite-list" width="320" height="320"></canvas>
             <div class="sprite-number-wrapper">
-              <h2 class="item-set-label">SPRITE:</h2>
+              <h2 class="item-set-label">Sprite:</h2>
               <span class="sparky-number sprite-number">1</span>
             </div>
             <div class="page-select">
-              <h2 class="item-set-label">SPRITESHEET:&nbsp;</h2>
+              <h2 class="item-set-label">Sheet:&nbsp;</h2>
 
               <button
                 class="btn btn-small btn-active page-button"
@@ -283,7 +290,7 @@
       <section id="SFX" class="section sfx-edit">
         <div class="sfx-edit-top">
           <div class="tempo-control">
-            <h2 class="item-set-label">TEMPO</h2>
+            <h2 class="item-set-label">Tempo</h2>
 
             <button
               class="btn btn-active btn-small tempo-button tempo-decrease"
@@ -298,7 +305,7 @@
             </button>
           </div>
           <div class="sound-control">
-            <h2 class="item-set-label">SOUND</h2>
+            <h2 class="item-set-label">Sound</h2>
 
             <button class="btn btn-active btn-small sound-button sound-prev">
               -
@@ -311,27 +318,27 @@
         </div>
         <div class="sound-paint-wrapper">
           <canvas class="sound-paint" width="512" height="320"></canvas>
-          <button class="btn btn-active deselect-button">DESELECT</button>
+          <button class="btn btn-active deselect-button">Deselect</button>
         </div>
         <div class="wave-select-wrapper btn-group">
-          <h2 class="item-set-label">WAVE</h2>
+          <h2 class="item-set-label">Wave</h2>
           <button class="btn wave-button btn-active" data-type="sine">
-            SINE
+            sine
           </button>
-          <button class="btn wave-button" data-type="triangle">TRIANGLE</button>
-          <button class="btn wave-button" data-type="sawtooth">SAWTOOTH</button>
-          <button class="btn wave-button" data-type="square">SQUARE</button>
+          <button class="btn wave-button" data-type="triangle">triangle</button>
+          <button class="btn wave-button" data-type="sawtooth">sawtooth</button>
+          <button class="btn wave-button" data-type="square">square</button>
         </div>
         <div class="fx-select-wrapper btn-group">
           <h2 class="item-set-label">FX</h2>
-          <button data-type="" class="btn fx-button btn-active">NONE</button>
-          <button data-type="fade-in" class="btn fx-button">FADE-IN</button>
-          <button data-type="fade-out" class="btn fx-button">FADE-OUT</button>
-          <button data-type="vibrato" class="btn fx-button">VIBRATO</button>
-          <button data-type="slide" class="btn fx-button">SLIDE</button>
+          <button data-type="" class="btn fx-button btn-active">none</button>
+          <button data-type="fade-in" class="btn fx-button">fade-in</button>
+          <button data-type="fade-out" class="btn fx-button">fade-out</button>
+          <button data-type="vibrato" class="btn fx-button">vibrato</button>
+          <button data-type="slide" class="btn fx-button">slide</button>
         </div>
         <div class="octave-select-wrapper btn-group">
-          <h2 class="item-set-label">OCTAVE</h2>
+          <h2 class="item-set-label">Octave</h2>
           <button class="octave-select-button btn btn-small" data-octave="-3">
             0 - 1
           </button>
@@ -343,55 +350,55 @@
           </button>
         </div>
         <div class="play-button-wrapper btn-group">
-          <button class="btn btn-active play-button">PLAY</button>
+          <button class="btn btn-active play-button">Play</button>
         </div>
       </section>
       <section id="GAME" class="section game-edit">
         <div class="game-edit-wrapper">
           <div class="editor-wrapper">
-            <div class="btn-group editor-tabs">
+            <div class="btn-group editor-tabs centered">
               <button
                 class="editor-tab btn control-btn btn-small btn-active"
                 data-tab="0"
               >
-                <div class="tooltip editor-tab-tooltip">BLORP</div>
+                <div class="tooltip editor-tab-tooltip"></div>
                 0
               </button>
               <button class="editor-tab btn control-btn btn-small" data-tab="1">
-                <div class="tooltip editor-tab-tooltip">BLORP</div>
+                <div class="tooltip editor-tab-tooltip"></div>
                 1
               </button>
               <button class="editor-tab btn control-btn btn-small" data-tab="2">
-                <div class="tooltip editor-tab-tooltip">BLORP</div>
+                <div class="tooltip editor-tab-tooltip"></div>
                 2
               </button>
               <button class="editor-tab btn control-btn btn-small" data-tab="3">
-                <div class="tooltip editor-tab-tooltip">BLORP</div>
+                <div class="tooltip editor-tab-tooltip"></div>
                 3
               </button>
               <button class="editor-tab btn control-btn btn-small" data-tab="4">
-                <div class="tooltip editor-tab-tooltip">BLORP</div>
+                <div class="tooltip editor-tab-tooltip"></div>
                 4
               </button>
               <button class="editor-tab btn control-btn btn-small" data-tab="5">
-                <div class="tooltip editor-tab-tooltip">BLORP</div>
+                <div class="tooltip editor-tab-tooltip"></div>
                 5
               </button>
               <button class="editor-tab btn control-btn btn-small" data-tab="6">
-                <div class="tooltip editor-tab-tooltip">BLORP</div>
+                <div class="tooltip editor-tab-tooltip"></div>
                 6
               </button>
               <button class="editor-tab btn control-btn btn-small" data-tab="7">
-                <div class="tooltip editor-tab-tooltip">BLORP</div>
+                <div class="tooltip editor-tab-tooltip"></div>
                 7
               </button>
             </div>
             <div class="editor"></div>
           </div>
           <div class="board-wrapper">
-            <div class="btn-group">
-              <button class="btn control-btn run-game">RUN</button>
-              <button class="btn control-btn stop-game">STOP</button>
+            <div class="btn-group centered">
+              <button class="btn control-btn btn-small run-game">&#9658;</button>
+              <button class="btn control-btn btn-small stop-game">&#x23f9;</button>
             </div>
             <div class="board"></div>
           </div>
@@ -408,11 +415,7 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-active download-button">
-        <a href="/sparky/sparky-lib/sparky-template.zip"
-          >DOWNLOAD LIBRARY + GAME TEMPLATE</a
-        >
-      </button>
+     
     </main>
     <script src="src/downloadComponents.js"></script>
     <script src="../sparky-lib/sparky.js"></script>
