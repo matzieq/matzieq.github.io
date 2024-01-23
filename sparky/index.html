@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JBOX Homepage</title>
+    <title>Sparky Homepage</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap"
@@ -14,13 +14,13 @@
   </head>
   <body>
     <header class="header header-main">
-      <a href="/jbox"><h1>JBox</h1></a>
+      <a href="/sparky"><h1>Sparky</h1></a>
       <nav class="navbar">
         <ul>
-          <li><a href="/jbox/editor/">Editor</a></li>
-          <li><a href="/jbox/learn/">Learn</a></li>
-          <li><a href="/jbox/documentation">Documentation</a></li>
-          <li><a href="/jbox/about">About</a></li>
+          <li><a href="/sparky/editor/">Editor</a></li>
+          <li><a href="/sparky/learn/">Learn</a></li>
+          <li><a href="/sparky/documentation">Documentation</a></li>
+          <li><a href="/sparky/about">About</a></li>
         </ul>
       </nav>
     </header>
@@ -29,61 +29,63 @@
         <div class="container">
           <p class="alpha-warning">
             <em
-              >Thank you for checking out JBox! Just a quick heads up: JBox is
-              in an early stage of development. It's fully functional, but may
+              >Thank you for checking out sparky! Just a quick heads up: sparky
+              is in an early stage of development. It's functional, but may
               include rough edges and bugs. It is, however updated (reasonably)
               often, and updated a lot, so these keep disappearing even as I
               write these words.
             </em>
           </p>
           <h2 class="subheader">
-            JBox is a set of simple open source tools to create<br />
+            Sparky is a set of simple open source tools to create<br />
             tiny web games in Javascript
           </h2>
           <img src="assets/images/game.png" alt="Game screenshot" />
           <p>
-            JBox is inspired by Pico-8, the Pyxel Engine and similar fantasy
+            Sparky is inspired by Pico-8, the Pyxel Engine and similar fantasy
             consoles and fantasy-console-likes. It provides a simple set of
-            tools to draw sprites, tilemaps and create sounds, along with a tiny
-            Javascript library with API modelled after the Pico-8.
+            tools to draw sprites, tilemaps, create sounds and write code, along
+            with a tiny Javascript library with API modelled after the Pico-8.
           </p>
           <div class="info-box">
             <h3>Simple and easy to use</h3>
             <p>
-              The tools are simple and the setup is minimal. All you need is a
-              browser and a text editor. You'll be up and running in minutes.
+              The tools are simple and there is no setup, as the environment is
+              self-contained. All you need is open the editor in a browser, make
+              your game and click "export".
             </p>
             <h3>Constraints to fuel creativity...</h3>
             <p>
-              Taking inspiration from fantasy consoles, JBox provides you with
+              Taking inspiration from fantasy consoles, sparky provides you with
               limited resources to work with. This way it's hard to get too
               carried away, and you can finish your game quickly.
             </p>
             <h3>...but you can cheat!</h3>
             <p>
-              JBox is just a library, so it does not impose any code
-              limitations. You can also include multiple sets of assets if you
+              At its heart, Sparky is just a library, so it does not impose any
+              code limitations. You can also download the game template and code
+              the game externally, including multiple sets of assets if you
               really want.
             </p>
             <h3>It's just plain Javascript</h3>
             <p>
-              No complex build tools or advanced features. Simply plug in the
+              No complex build tools or advanced features. Make the entire game
+              in the browser and export with one click - or simply plug in the
               library in a script tag, along with the data generated from the
               editor and your own code, just like in the olden days.
             </p>
             <h3>Batteries included</h3>
             <p>
-              JBox gives you all the tools you need to create tiny pixel art
+              Sparky gives you all the tools you need to create tiny pixel art
               games. The game editor allows you to create assets and save them
-              on your machine. The library provides basic functions for display,
+              on your machine, as well as a code editor and the ability to
+              export the game. The library provides basic functions for display,
               input, sounds and a game loop.
             </p>
             <h3>It's really tiny</h3>
             <p>
-              Depending on how much stuff you cram in, the library together with
-              the assets can take as little as 6kB zipped. You can totally use
-              it for a
-              <a href="http://js13kgames.com/">Js13k jam</a>!
+              Game size is measured in kilobytes. A game is just an html file
+              that you can double click and launch in any browser.
             </p>
             <h3>...and it's open source</h3>
             <p>
@@ -99,9 +101,10 @@
         <div class="container">
           <h2>Game editor</h2>
           <p>
-            Use the editor to create images, maps and sounds for your game. The
-            data is saved as a javascript file that you just embed into your
-            HTML together with the library and your own code.
+            Use the editor to create images, maps, sounds and code for your
+            game. Export the game straight from the editor, or save it as a
+            javascript file that you just embed into your own HTML together with
+            the library and your own code.
           </p>
           <div class="info-box">
             <h3>Use the sprite editor to draw your sprites</h3>
@@ -148,9 +151,9 @@
         <div class="container">
           <h2>Library</h2>
           <p>
-            The JBox library is just a bunch of functions to make it as easy and
-            painless as possible to display things on the screen, read input and
-            make some noise. It abstracts away the chores and many decisions
+            The sparky library is just a bunch of functions to make it as easy
+            and painless as possible to display things on the screen, read input
+            and make some noise. It abstracts away the chores and many decisions
             that would lead to analysis paralysis. All games use a 128x128
             resolution, a fixed 6 color palette and a limited set of resources
             you create in the editor. This way it takes very little code to get
@@ -176,7 +179,7 @@
         <ul>
           <li><a href="/">President's homepage</a></li>
           <li>
-            <a href="https://github.com/matzieq/JBOX">Source on github</a>
+            <a href="https://github.com/matzieq/sparky">Source on github</a>
           </li>
           <li>
             <a href="https://twitter.com/matzieq">Twitter</a>

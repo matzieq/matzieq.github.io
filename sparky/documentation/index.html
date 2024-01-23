@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JBOX Documentation</title>
+    <title>Sparky Documentation</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap"
@@ -15,19 +15,19 @@
   </head>
   <body>
     <header class="header header-main">
-      <a href="/jbox"><h1>JBox</h1></a>
+      <a href="/sparky"><h1>Sparky</h1></a>
       <nav class="navbar">
         <ul>
-          <li><a href="/jbox/editor">Editor</a></li>
-          <li><a href="/jbox/learn">Learn</a></li>
-          <li><a href="/jbox/documentation">Documentation</a></li>
-          <li><a href="/jbox/about">About</a></li>
+          <li><a href="/sparky/editor">Editor</a></li>
+          <li><a href="/sparky/learn">Learn</a></li>
+          <li><a href="/sparky/documentation">Documentation</a></li>
+          <li><a href="/sparky/about">About</a></li>
         </ul>
       </nav>
     </header>
     <main class="app-content">
       <section class="info">
-        <h2 class="subheader">JBox API documentation</h2>
+        <h2 class="subheader">Sparky API documentation</h2>
       </section>
       <section class="api">
         <h3>Index</h3>
@@ -91,11 +91,11 @@
         <h3>Basics</h3>
         <h4 class="code" id="f-init">init(config)</h4>
 
-        <p>Creates a JBox game.</p>
+        <p>Creates a sparky game.</p>
         <ul>
           <li>
             <strong class="code">config</strong>
-            - configuration object used by JBox to create a game loop. The
+            - configuration object used by sparky to create a game loop. The
             accepted fields are:
             <ul>
               <li>
@@ -146,8 +146,8 @@
         <p>
           Prints the string <code>str</code> to coordinates <code>x,y</code> in
           color <code>c</code> (or current draw color if that is not specified).
-          JBox has no concept of "cursor", therefore you must always provide
-          coordinates to draw text. All characters in JBox's font are three
+          sparky has no concept of "cursor", therefore you must always provide
+          coordinates to draw text. All characters in sparky's font are three
           pixels wide and five pixels tall.
         </p>
         <h4 class="code" id="f-color">color(c = 0)</h4>
@@ -210,7 +210,7 @@
         <p>
           Returns the boolean state of button no. <code>key</code>. Instead of
           using numbers, you can pass one of predefined constants provided by
-          JBox:
+          sparky:
 
           <span><code>BTN_LEFT = 0</code></span>
           <span><code>BTN_UP = 1</code></span>
@@ -263,9 +263,9 @@
               I haven't figured out how to make a tracker yet. I'm still very
               new to the web audio API, and it's pretty scary. That said, it's
               just Javascript. You can play any sound or music file you like
-              using whatever technique or library you want. I might extend JBox
-              with the capability to do just that, but I think I'd rather learn
-              how to make a tracker instead.
+              using whatever technique or library you want. I might extend
+              sparky with the capability to do just that, but I think I'd rather
+              learn how to make a tracker instead.
             </p>
           </li>
           <li>
@@ -321,7 +321,7 @@
         <ul>
           <li><a href="/">President's homepage</a></li>
           <li>
-            <a href="https://github.com/matzieq/JBOX">Source on github</a>
+            <a href="https://github.com/matzieq/sparky">Source on github</a>
           </li>
           <li>
             <a href="https://twitter.com/matzieq">Twitter</a>

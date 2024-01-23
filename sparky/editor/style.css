@@ -6,8 +6,14 @@
 .header,
 .controls {
   max-width: 1600px;
-  padding: 36px;
+  padding: 12px;
   margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header ul,
@@ -25,7 +31,7 @@
 }
 
 .controls .btn-group.project-buttons {
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .controls .btn.btn-file {
@@ -45,6 +51,7 @@
 }
 
 .section {
+  max-width: 1600px;
   display: none;
 }
 
@@ -80,11 +87,11 @@
   background: none;
   outline: none;
   border: 1px solid #8b6d9c;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #8b6d9c;
-  padding: 10px;
+  padding: 6px 10px;
   cursor: pointer;
-  min-width: 220px;
+  min-width: 160px;
   display: inline-block;
   text-align: center;
   border-radius: 0;
@@ -92,7 +99,7 @@
 
 .btn.control-button {
   border: none;
-  padding: 10px 30px;
+  padding: 8px 16px;
 }
 
 .btn.btn-active {
@@ -220,16 +227,16 @@ canvas {
 }
 
 .item-set-label {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   min-width: 100px;
   display: inline-block;
   font-weight: 400;
 }
 
-.jb-number {
+.sparky-number {
   display: inline-block;
   padding: 0 10px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .sprite-flags {
@@ -281,6 +288,9 @@ canvas {
 #import-data-file {
   display: none;
 }
+#import-game-file {
+  display: none;
+}
 
 .modal-overlay {
   display: none;
@@ -313,15 +323,25 @@ canvas {
   justify-content: space-between;
 }
 
+.centered {
+  display: flex;
+  justify-content: center;
+}
+
 .modal .modal-text {
   font-size: 2rem;
+}
+
+.editor-wrapper {
+
+  min-width: 50%;
 }
 
 
 .editor {
   border: 1px solid #fbf5ef;
   margin-right: 20px;
-  min-width: 50%;
+  width: 100%;
   font-family: monospace;
   font-size: 1.2rem;
 }
@@ -332,13 +352,13 @@ canvas {
 }
 
 .editor {
-  font-family: 'Source Code Pro', monospace;
-  font-size: 18px;
+  /* font-family: 'Source Code Pro', monospace; */
+  /* font-size: 18px; */
   font-weight: 400;
-  height: 340px;
-  letter-spacing: normal;
-  line-height: 20px;
-  padding: 10px;
+  height: 512px;
+  /* letter-spacing: normal; */
+  /* line-height: 20px; */
+  /* padding: 10px; */
   tab-size: 4;
 }
 
@@ -362,9 +382,39 @@ canvas {
 
 .game-edit-wrapper {
   display: flex;
+  flex-direction: column;
 }
 
-.board {
-  max-width: 512px;
-  max-height: 512px;
+.editor-wrapper {
+  margin-right: 10px;
+}
+
+
+@media (min-width: 768px) {
+  .game-edit-wrapper {
+    flex-direction: row;
+  }
+  
+  .board {
+    max-width: 512px;
+    max-height: 512px;
+  }
+}
+
+.editor-tab {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  top: -80px;
+  left: -50%;
+  visibility: hidden;
+  background-color: #494d7e;
+  white-space: nowrap;
+  padding: 5px;
+}
+
+.editor-tab:hover .tooltip {
+  visibility: visible;
 }

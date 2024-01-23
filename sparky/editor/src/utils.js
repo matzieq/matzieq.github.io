@@ -228,3 +228,13 @@ function fill(image, sr, sc, newColor, current) {
   fill(image, sr, sc - 1, newColor, current);
   fill(image, sr, sc + 1, newColor, current);
 }
+
+function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+}

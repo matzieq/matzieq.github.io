@@ -1,7 +1,7 @@
-/* eslint-disable */
+var sparkyString = `/* eslint-disable */
 
 /**
- * JBOX version 0.2.0 by President of Space
+ * Sparky version 0.2.0 by President of Space
  *
  * "private" values and methods are marked with a preceding underscore
  * but it's just JS, so there's nothing I can (or want to) do to stop you
@@ -19,9 +19,9 @@ function isSafari() {
   );
 }
 
-var jb = jb || {};
+var sparky = sparky || {};
 
-jb._letters = {
+sparky._letters = {
   A: [
     [, 1],
     [1, , 1],
@@ -346,7 +346,7 @@ jb._letters = {
   ],
 };
 
-jb._origPal = [
+sparky._origPal = [
   [251, 245, 239],
   [242, 211, 171],
   [198, 159, 165],
@@ -355,28 +355,28 @@ jb._origPal = [
   [39, 39, 68],
 ];
 
-jb._rgbPal = [...jb._origPal];
+sparky._rgbPal = [...sparky._origPal];
 
-jb._screenSize = 128;
+sparky._screenSize = 128;
 
-jb._transparent = [false, false, false, false, false, true];
+sparky._transparent = [false, false, false, false, false, true];
 
-jb._dataSet = [0];
+sparky._dataSet = [0];
 
-jb.BTN_LEFT = 0;
-jb.BTN_UP = 1;
-jb.BTN_RIGHT = 2;
-jb.BTN_DOWN = 3;
-jb.BTN_A = 4;
-jb.BTN_B = 5;
-jb.BTN_START = 6;
-jb.BTN_SELECT = 7;
+sparky.BTN_LEFT = 0;
+sparky.BTN_UP = 1;
+sparky.BTN_RIGHT = 2;
+sparky.BTN_DOWN = 3;
+sparky.BTN_A = 4;
+sparky.BTN_B = 5;
+sparky.BTN_START = 6;
+sparky.BTN_SELECT = 7;
 
-jb._middleC = 440 * Math.pow(Math.pow(2, 1 / 12), -9);
+sparky._middleC = 440 * Math.pow(Math.pow(2, 1 / 12), -9);
 
-jb._cam = { x: 0, y: 0 };
+sparky._cam = { x: 0, y: 0 };
 
-jb._keys = {
+sparky._keys = {
   left: {
     pressed: false,
     justPressed: false,
@@ -411,13 +411,13 @@ jb._keys = {
   },
 };
 
-jb._drawColor = 0;
+sparky._drawColor = 0;
 
-jb._screenBuffer = null;
+sparky._screenBuffer = null;
 
-jb._gamepad = null;
+sparky._gamepad = null;
 
-jb._getClearScreenData = function (col = 5) {
+sparky._getClearScreenData = function (col = 5) {
   const emptyScreenData = new Uint8ClampedArray(128 * 128 * 4);
 
   for (let i = 0; i < 128 * 128 * 4; i += 4) {
@@ -431,42 +431,64 @@ jb._getClearScreenData = function (col = 5) {
   return emptyScreenData;
 };
 
-jb.init = function (config) {
+sparky.init = function (config) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
   const scale = 1;
-  this._jbcanv = document.createElement("canvas");
-  this._jbcanv.width = this._screenSize * scale;
-  this._jbcanv.height = this._screenSize * scale;
-  this._jbctx = this._jbcanv.getContext("2d");
-  this._jbctx.scale(scale, scale);
+  this._sparkycanv = document.createElement("canvas");
+  this._sparkycanv.width = this._screenSize * scale;
+  this._sparkycanv.height = this._screenSize * scale;
+  this._sparkycanv.className = "sparky-canvas";
+  this._sparkyctx = this._sparkycanv.getContext("2d");
+  this._sparkyctx.scale(scale, scale);
 
   this._actx = new AudioContext();
 
-  this._jbctx.imageSmoothingEnabled = false;
+  this._sparkyctx.imageSmoothingEnabled = false;
 
   const el = document.querySelector(
-    config && config.element ? `.${config.element}` : ".board"
+     ".board"
   );
+  const isEmbedded = !!el;
+
+  this._isEmbedded = isEmbedded;
 
   if (el) {
     el.innerHTML = "";
-    el.appendChild(this._jbcanv);
+    el.appendChild(this._sparkycanv);
   } else {
-    document.body.appendChild(this._jbcanv);
+    document.body.appendChild(this._sparkycanv);
   }
   this._draw = config && config.draw ? config.draw : function () {};
   this._update = config && config.update ? config.update : function () {};
   const style = document.createElement("style");
 
-  style.textContent = `
+  style.textContent = isEmbedded
+    ? \`
+    .sparky-canvas {
+      display: block;
+      margin: 0 auto;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+  \`
+    : \`
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #000;
+    }
+
     canvas {
       display: block;
       margin: 0 auto;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
     }
-  `;
+  \`;
 
   document.head.appendChild(style);
 
@@ -492,17 +514,27 @@ jb.init = function (config) {
   }
 };
 
-jb._fitToScreen = function () {
-  if (window.innerWidth > window.innerHeight) {
-    this._jbcanv.style.height = "50vh";
-    this._jbcanv.style.width = "auto";
+sparky._fitToScreen = function () {
+  if (this._isEmbedded) {
+    if (window.innerWidth > window.innerHeight) {
+      this._sparkycanv.style.height = "50vh";
+      this._sparkycanv.style.width = "auto";
+    } else {
+      this._sparkycanv.style.width = "100%";
+      this._sparkycanv.style.height = "auto";
+    }
   } else {
-    this._jbcanv.style.width = "100%";
-    this._jbcanv.style.height = "auto";
+    if (window.innerWidth > window.innerHeight) {
+      this._sparkycanv.style.height = "100vh";
+      this._sparkycanv.style.width = "auto";
+    } else {
+      this._sparkycanv.style.width = "100vw";
+      this._sparkycanv.style.height = "auto";
+    }
   }
 };
 
-jb._step = function (timestamp) {
+sparky._step = function (timestamp) {
   if (!this._lastFrame) {
     this._lastFrame = 0;
   }
@@ -515,7 +547,7 @@ jb._step = function (timestamp) {
   try {
     this._update(_dt / 1000);
     this._draw();
-    this._jbctx.putImageData(this._screenBuffer, 0, 0);
+    this._sparkyctx.putImageData(this._screenBuffer, 0, 0);
     this._frameRequestId = window.requestAnimationFrame(t => this._step(t));
   } catch (err) {
     console.error(err);
@@ -523,7 +555,7 @@ jb._step = function (timestamp) {
   }
 };
 
-jb._readGamepadState = function () {
+sparky._readGamepadState = function () {
   const gamepads = navigator.getGamepads
     ? navigator.getGamepads()
     : navigator.webkitGetGamepads
@@ -610,18 +642,18 @@ jb._readGamepadState = function () {
   this._keys.start.pressed = isStart;
 };
 
-jb.cls = function (col) {
+sparky.cls = function (col) {
   const emptyScreen = this._getClearScreenData(col);
   for (let i = 0; i < emptyScreen.length; i++) {
     this._screenBuffer.data[i] = emptyScreen[i];
   }
 };
 
-jb.camera = function (x = 0, y = 0) {
+sparky.camera = function (x = 0, y = 0) {
   this._cam = { x, y };
 };
 
-jb.spr = function (
+sparky.spr = function (
   spriteIndex,
   x,
   y,
@@ -659,7 +691,7 @@ jb.spr = function (
   }
 };
 
-jb._spr = function (
+sparky._spr = function (
   spriteIndex,
   _x,
   _y,
@@ -701,7 +733,7 @@ jb._spr = function (
   }
 };
 
-jb._updatePixel = function (x, y, r, g, b) {
+sparky._updatePixel = function (x, y, r, g, b) {
   if (this._isOnScreen(x, y)) {
     const i = (y * 128 + x) * 4;
 
@@ -714,14 +746,14 @@ jb._updatePixel = function (x, y, r, g, b) {
   }
 };
 
-jb.color = function (col = 0) {
+sparky.color = function (col = 0) {
   if (col >= 0 && col < this._rgbPal.length) {
     this._drawColor = col;
   }
 };
 
 // Based on pixel font by PaulBGD
-jb.print = function (_str, _x, _y, col = this._drawColor) {
+sparky.print = function (_str, _x, _y, col = this._drawColor) {
   const needed = [];
 
   const str =
@@ -759,7 +791,7 @@ jb.print = function (_str, _x, _y, col = this._drawColor) {
   });
 };
 
-jb._circ = function (_x, _y, r, col = this._drawColor, fill = false) {
+sparky._circ = function (_x, _y, r, col = this._drawColor, fill = false) {
   const { x, y } = this._adjustCoords(_x, _y);
 
   for (let pY = -r; pY <= r; pY++) {
@@ -782,29 +814,36 @@ jb._circ = function (_x, _y, r, col = this._drawColor, fill = false) {
   }
 };
 
-jb.circ = function (x, y, r, col) {
-  jb._circ(x, y, r, col);
+sparky.circ = function (x, y, r, col) {
+  sparky._circ(x, y, r, col);
 };
 
-jb.circfill = function (x, y, r, col) {
-  jb._circ(x, y, r, col, true);
+sparky.circfill = function (x, y, r, col) {
+  sparky._circ(x, y, r, col, true);
 };
 
-jb.rect = function (x0, y0, x1, y1, col) {
+sparky.rect = function (x0, y0, x1, y1, col) {
   this._rect(x0, y0, x1, y1, col, false);
 };
-jb.rectfill = function (x0, y0, x1, y1, col) {
+sparky.rectfill = function (x0, y0, x1, y1, col) {
   this._rect(x0, y0, x1, y1, col, true);
 };
 
-jb._adjustCoords = function (x, y) {
+sparky._adjustCoords = function (x, y) {
   return {
     x: Math.round(x - this._cam.x),
     y: Math.round(y - this._cam.y),
   };
 };
 
-jb._rect = function (_x0, _y0, _x1, _y1, col = this._drawColor, fill = false) {
+sparky._rect = function (
+  _x0,
+  _y0,
+  _x1,
+  _y1,
+  col = this._drawColor,
+  fill = false
+) {
   //
   if (_x0 > _x1) {
     [_x0, _x1] = [_x1, _x0];
@@ -838,11 +877,11 @@ jb._rect = function (_x0, _y0, _x1, _y1, col = this._drawColor, fill = false) {
   }
 };
 
-jb._isOnScreen = function (x, y) {
+sparky._isOnScreen = function (x, y) {
   return x >= 0 && x < this._screenSize && y >= 0 && y < this._screenSize;
 };
 
-jb.map = function (celX = 0, celY = 0, x = 0, y = 0, w = 127, h = 127) {
+sparky.map = function (celX = 0, celY = 0, x = 0, y = 0, w = 127, h = 127) {
   // const { x, y } = this._adjustCoords(_x, _y);
 
   for (let i = 0; i < 64; i++) {
@@ -884,7 +923,7 @@ jb.map = function (celX = 0, celY = 0, x = 0, y = 0, w = 127, h = 127) {
   }
 };
 
-jb.mget = function (_x, _y) {
+sparky.mget = function (_x, _y) {
   if (_x < 0 || _y < 0 || _x > 128 || _y > 128) {
     return "";
   }
@@ -903,7 +942,7 @@ jb.mget = function (_x, _y) {
   return mapTile != undefined ? mapTile : "";
 };
 
-jb.mset = function (_x, _y, sprite) {
+sparky.mset = function (_x, _y, sprite) {
   if (_x < 0 || _y < 0 || _x > 128 || _y > 128 || sprite < 0 || sprite > 63) {
     return;
   }
@@ -919,7 +958,7 @@ jb.mset = function (_x, _y, sprite) {
   this._data[this._dataSet].map[screenNumber * 256 + cellNumber] = sprite;
 };
 
-jb.sget = function (_x, _y) {
+sparky.sget = function (_x, _y) {
   if (_x < 0 || _y < 0 || _x > 63 || _y > 63) {
     return "";
   }
@@ -938,7 +977,7 @@ jb.sget = function (_x, _y) {
   return col != undefined ? col : "";
 };
 
-jb.sset = function (_x, _y, col = this._drawColor) {
+sparky.sset = function (_x, _y, col = this._drawColor) {
   if (_x < 0 || _y < 0 || _x > 63 || _y > 63 || col < 0 || col > 5) {
     return;
   }
@@ -954,7 +993,7 @@ jb.sset = function (_x, _y, col = this._drawColor) {
   this._data[this._dataSet].sprites[spriteNumber * 64 + pixelNumber] = col;
 };
 
-jb.fget = function (sprite, flag) {
+sparky.fget = function (sprite, flag) {
   if (
     sprite < 0 ||
     sprite > 63 ||
@@ -970,7 +1009,7 @@ jb.fget = function (sprite, flag) {
   }
 };
 
-jb.fset = function (sprite, flagOrBitfield, value) {
+sparky.fset = function (sprite, flagOrBitfield, value) {
   if (
     sprite < 0 ||
     sprite > 63 ||
@@ -993,7 +1032,7 @@ jb.fset = function (sprite, flagOrBitfield, value) {
   }
 };
 
-jb.pget = function (x, y) {
+sparky.pget = function (x, y) {
   if (this._isOnScreen(x, y)) {
     const pIndex = (y * 128 + x) * 4;
     const [r, g, b] = this._screenBuffer.data.slice(pIndex, pIndex + 4);
@@ -1006,19 +1045,19 @@ jb.pget = function (x, y) {
   }
 };
 
-jb.pset = function (x, y, col = this._drawColor) {
+sparky.pset = function (x, y, col = this._drawColor) {
   if (col >= 0 && col <= 5) {
     this._updatePixel(x, y, ...this._rgbPal[col]);
   }
 };
 
-jb._resetKeys = function () {
+sparky._resetKeys = function () {
   for (key in this._keys) {
     this._keys[key].justPressed = false;
   }
 };
 
-jb._onKeyPressed = function (e) {
+sparky._onKeyPressed = function (e) {
   this._actx.resume();
   switch (e.key.toLowerCase()) {
     case "arrowup":
@@ -1062,7 +1101,7 @@ jb._onKeyPressed = function (e) {
   }
 };
 
-jb._onKeyReleased = function (e) {
+sparky._onKeyReleased = function (e) {
   switch (e.key) {
     case "ArrowUp":
       this._keys.up.pressed = false;
@@ -1096,7 +1135,7 @@ jb._onKeyReleased = function (e) {
   }
 };
 
-jb.btn = function (key) {
+sparky.btn = function (key) {
   switch (key) {
     case 0:
       return this._keys.left.pressed;
@@ -1117,7 +1156,7 @@ jb.btn = function (key) {
   }
 };
 
-jb.btnp = function (key) {
+sparky.btnp = function (key) {
   switch (key) {
     case 0:
       if (this._keys.left.justPressed) {
@@ -1178,12 +1217,12 @@ jb.btnp = function (key) {
   }
 };
 
-jb._getFrequency = function (dist, octaveDiff = 0) {
+sparky._getFrequency = function (dist, octaveDiff = 0) {
   freq = this._middleC * Math.pow(Math.pow(2, 1 / 12), dist);
   return freq * Math.pow(2, octaveDiff);
 };
 
-jb._soundEffect = function (
+sparky._soundEffect = function (
   actx, // audio context
   frequency, //The sound's fequency pitch in Hertz
   type, //waveform type: "sine", "triangle", "square", "sawtooth"
@@ -1312,7 +1351,7 @@ jb._soundEffect = function (
   }
 };
 
-jb.sfx = function (soundIndex) {
+sparky.sfx = function (soundIndex) {
   const sound = this._data[this._dataSet].sfx[soundIndex];
   const interval = sound.tempo / 64;
   for (let i = 0; i < sound.samples.length; i++) {
@@ -1353,7 +1392,7 @@ jb.sfx = function (soundIndex) {
   }
 };
 
-jb._chainedSfx = function (sfxList) {
+sparky._chainedSfx = function (sfxList) {
   let sounds = [];
 
   for (const soundIndex in sfxList) {
@@ -1405,7 +1444,7 @@ jb._chainedSfx = function (sfxList) {
   }
 };
 
-jb._createImageData = function () {
+sparky._createImageData = function () {
   this._images = [];
 
   for (let spr = 0; spr < 64; spr++) {
@@ -1428,7 +1467,7 @@ jb._createImageData = function () {
   }
 };
 
-jb.palt = function (col, transp) {
+sparky.palt = function (col, transp) {
   if (col == null && transp == null) {
     this._transparent = [false, false, false, false, false, true];
     return;
@@ -1439,7 +1478,7 @@ jb.palt = function (col, transp) {
   }
 };
 
-jb.pal = function (col1, col2) {
+sparky.pal = function (col1, col2) {
   if (col2 == null) {
     if (col1 == null) {
       this._rgbPal = [...this._origPal];
@@ -1451,13 +1490,13 @@ jb.pal = function (col1, col2) {
   this._rgbPal[col1] = this._origPal[col2];
 };
 
-jb.__switchDataset = function (newData) {
+sparky.__switchDataset = function (newData) {
   if (newData > 0 && newData < this._data.length) {
     this._dataSet = newData;
   }
 };
 
-jb.line = function (_x0, _y0, _x1, _y1, col = this._drawColor) {
+sparky.line = function (_x0, _y0, _x1, _y1, col = this._drawColor) {
   let { x: x0, y: y0 } = this._adjustCoords(_x0, _y0);
   let { x: x1, y: y1 } = this._adjustCoords(_x1, _y1);
   const dx = Math.abs(x1 - x0);
@@ -1481,3 +1520,23 @@ jb.line = function (_x0, _y0, _x1, _y1, col = this._drawColor) {
     }
   }
 };
+
+`;
+
+function getDownloadHtml(gameTitle, dataString, gameString) {
+  return `
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>${gameTitle}</title>
+    </head>
+    <body>
+      <script>${sparkyString}</script>
+      <script>${dataString}</script>
+      <script>${gameString}</script>
+    </body>
+  </html>
+`;
+}
