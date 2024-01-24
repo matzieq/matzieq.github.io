@@ -3,4 +3,4 @@ if (
   localStorage.getItem(LOCAL_STORAGE_DATA_KEY)
 ) {
   eval(localStorage.getItem("SPARKY_GAME_DATA"));
-  eval(localStorage.getItemLOCAL_STORAGE_DATA_KEY}
+  eval(localStorage.getItem(LOCAL_STORAGE_DATA_KEY)}

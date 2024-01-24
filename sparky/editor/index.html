@@ -17,21 +17,52 @@
   </head>
 
   <body>
-    <header class="header">
-      <a href="/sparky">
-        <h1>Sparky</h1>
-      </a>
-      <nav class="navbar">
-        <ul>
-          <li><a href="/sparky/editor">Editor</a></li>
-          <li><a href="/sparky/learn">Learn</a></li>
-          <li><a href="/sparky/documentation">Documentation</a></li>
-          <li><a href="/sparky/about">About</a></li>
-        </ul>
-      </nav>
-    </header>
     <main class="app-content">
       <section class="controls">
+        <ul>
+          <li>
+            <a href="/sparky"><h1>Sparky</h1></a>
+          </li>
+          <li>
+            <button
+              class="btn btn-active control-button"
+              data-activate="SPRITE"
+            >
+              sprites
+            </button>
+          </li>
+          <li>
+            <button class="btn control-button" data-activate="TILEMAP">
+              map
+            </button>
+          </li>
+          <li>
+            <button class="btn control-button" data-activate="SFX">
+              sound
+            </button>
+          </li>
+          <li>
+            <button class="btn control-button" data-activate="GAME">
+              code
+            </button>
+          </li>
+          <li>
+            <button class="btn control-button" data-activate="MENU">
+              menu
+            </button>
+          </li>
+        </ul>
+      </section>
+      <section id="MENU" class="section controls">
+        <header class="header header-sparky">
+          <nav class="navbar navbar-sparky">
+            <ul>
+              <li><a href="/sparky/learn">Learn</a></li>
+              <li><a href="/sparky/documentation">Documentation</a></li>
+              <li><a href="/sparky/about">About</a></li>
+            </ul>
+          </nav>
+        </header>
         <ul class="btn-group project-buttons">
           <li>
             <button class="btn btn-file clear-button">
@@ -69,33 +100,7 @@
             </button>
           </li>
         </ul>
-        <ul>
-          <li>
-            <button
-              class="btn btn-active control-button"
-              data-activate="SPRITE"
-            >
-              sprites
-            </button>
-          </li>
-          <li>
-            <button class="btn control-button" data-activate="TILEMAP">
-              map
-            </button>
-          </li>
-          <li>
-            <button class="btn control-button" data-activate="SFX">
-              sound
-            </button>
-          </li>
-          <li>
-            <button class="btn control-button" data-activate="GAME">
-              code
-            </button>
-          </li>
-        </ul>
       </section>
-
       <section id="SPRITE" class="sprite-edit section section-active">
         <div class="sprite-edit-wrapper">
           <div class="draw-grid">
