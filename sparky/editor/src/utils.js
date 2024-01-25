@@ -100,9 +100,15 @@ function soundEffect(
     case "slide":
       slide(oscillator.frequency);
       break;
+    case "noise":
+      noise(oscillator.frequency);
     default:
       break;
   }
+
+  // if (isNoise) {
+  //   noise(oscillator.frequency);
+  // }
 
   // volume.gain.setTargetAtTime(
   //   0,
@@ -161,6 +167,20 @@ function soundEffect(
     var waveTable = [];
     for (var i = 0; i < timeout; i += 0.01) {
       waveTable.push(frequency + Math.sin(i * 40) * (frequency / 40));
+    }
+
+    frequencyNode.setValueCurveAtTime(
+      waveTable,
+      actx.currentTime + wait,
+      timeout
+    );
+  }
+
+  function noise(frequencyNode) {
+    var waveTable = [];
+    var curfreq = 5 * frequency;
+    for (var i = 0; i < timeout; i += 0.001) {
+      waveTable.push(Math.random() * curfreq - curfreq / 3);
     }
 
     frequencyNode.setValueCurveAtTime(

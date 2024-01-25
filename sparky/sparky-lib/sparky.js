@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 /**
- * Sparky version 0.2.3 by President of Space
+ * Sparky version 0.3.0 by President of Space
  *
  * "private" values and methods are marked with a preceding underscore
  * but it's just JS, so there's nothing I can (or want to) do to stop you
@@ -448,7 +448,7 @@ sparky.init = function (config) {
   this._sparkyctx.imageSmoothingEnabled = false;
 
   const el = document.querySelector(
-    config && config.element ? `.${config.element}` : ".board"
+    config && config.element ? "." + config.element : ".board"
   );
   const isEmbedded = !!el;
 
@@ -459,7 +459,7 @@ sparky.init = function (config) {
     el.appendChild(this._sparkycanv);
     this._parentElem = el;
   } else {
-    document.body.document.body.appendChild(this._sparkycanv);
+    document.body.appendChild(this._sparkycanv);
     this._parentElem = document.body;
   }
   this._draw = config && config.draw ? config.draw : function () {};
@@ -628,22 +628,8 @@ sparky._initMobileControls = function () {
     this._areMobileControlsActive = true;
     const mobileControlsWrapper = document.createElement("div");
     mobileControlsWrapper.className = "mobile-controls-wrapper";
-    mobileControlsWrapper.innerHTML = `
-    <div class="control-pad">
-      <button class="control control-left">&larr;</button>
-      <button class="control control-right">&rarr;</button>
-      <button class="control control-up">&uarr;</button>
-      <button class="control control-down">&darr;</button>
-    </div>
-    <div class="control-buttons">
-      <button class="control control-select">select</button>
-      <button class="control control-start">start</button>
-    </div>
-    <div class="action-buttons">
-      <button class="control control-a">A</button>
-      <button class="control control-b">B</button>
-    </div>    
-    `;
+    mobileControlsWrapper.innerHTML =
+      '<div class="control-pad">  <button class="control control-left">&larr;</button>  <button class="control control-right">&rarr;</button>  <button class="control control-up">&uarr;</button>  <button class="control control-down">&darr;</button></div><div class="control-buttons">  <button class="control control-select">select</button>  <button class="control control-start">start</button></div><div class="action-buttons">  <button class="control control-a">A</button>  <button class="control control-b">B</button></div>    ';
     this._parentElem.appendChild(mobileControlsWrapper);
   }
 
@@ -1416,7 +1402,7 @@ sparky._soundEffect = function (
   volumeValue, //The sound's maximum volume
   wait, //The time, in seconds, to wait before playing the sound
   timeout, //A number, in seconds, which is the maximum duration for sound effects
-  fx, // what effect to apply: "fade-in", "fade-out", "vibrato", "slide"
+  fx, // what effect to apply: "fade-in", "fade-out", "vibrato", "slide", "noise"
   nextFreq // if there is any sound after this, for slide purposes
 ) {
   //Set the default values
@@ -1460,6 +1446,8 @@ sparky._soundEffect = function (
     case "slide":
       slide(oscillator.frequency);
       break;
+    case "noise":
+      noise(oscillator.frequency);
     default:
       break;
   }
@@ -1532,6 +1520,21 @@ sparky._soundEffect = function (
       timeout
     );
   }
+
+  function noise(frequencyNode) {
+    var waveTable = [];
+    var curfreq = 5 * frequency;
+    for (var i = 0; i < timeout; i += 0.001) {
+      waveTable.push(Math.random() * curfreq - curfreq / 3);
+    }
+
+    frequencyNode.setValueCurveAtTime(
+      waveTable,
+      actx.currentTime + wait,
+      timeout
+    );
+  }
+
   function play(node) {
     node.start(actx.currentTime + wait);
     node.stop(actx.currentTime + wait + timeout);

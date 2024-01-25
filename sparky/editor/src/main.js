@@ -201,14 +201,13 @@ function getMovingYouInfernalMachine() {
 
   if (localStorage.getItem(LOCAL_STORAGE_CODE_KEY)) {
     const gameCode = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CODE_KEY));
-    console.log({ gameCode });
+
     appEditState.codeContents = gameCode;
 
     if (gameCode[0]) {
       jar.updateCode(gameCode[0]);
     }
     try {
-      console.log(gameCode.join("\n"));
       previewGame(gameCode.join("\n"));
     } catch (err) {
       console.log({ err });
@@ -228,11 +227,9 @@ function exportGame() {
 
   const gameCodeString = appEditState.codeContents.join("///->\n");
 
-  console.log({ code: appEditState.codeContents, gameCodeString });
-
   download(
     "index.html",
-    getDownloadHtml("Game", gameDataString, gameCodeString)
+    getDownloadHtml("Game", gameDataString, gameCodeString, sparkyString)
   );
 }
 
@@ -250,14 +247,13 @@ function importGame() {
               .map((part) => part.replace("</script>", ""))
               .map((part) => part.replace("</body>", ""))
               .map((part) => part.replace("</html>", ""));
-            console.log(fileContents);
+
             const data = fileContents[2];
             const code = fileContents[3].split("///->");
-            // console.log(reader.result)
+
             const index = data.indexOf('{"sprites');
 
             const json = data.slice(index).replace(";", "").replace(")", "");
-            console.log({ json: json.slice(0, data.indexOf("}]}]}]")) });
 
             const res = JSON.parse(json.slice(0, data.indexOf("}]}]}]")));
 
@@ -1074,8 +1070,6 @@ function parseGameData() {
 }
 
 function previewGame(codeTab) {
-  // const pos = jar.save();
-  // console.log("Firing preview", pos);
   const code = appEditState.codeContents;
   const tab = appEditState.activeCodeTab;
   code[tab] = codeTab;
@@ -1093,7 +1087,6 @@ function previewGame(codeTab) {
         currentTabElement.style.padding = "0";
       }
     });
-    console.log({ code });
   }
 }
 

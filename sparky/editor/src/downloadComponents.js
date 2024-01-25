@@ -1,7 +1,7 @@
 var sparkyString = `/* eslint-disable */
 
 /**
- * Sparky version 0.2.0 by President of Space
+ * Sparky version 0.3.0 by President of Space
  *
  * "private" values and methods are marked with a preceding underscore
  * but it's just JS, so there's nothing I can (or want to) do to stop you
@@ -435,6 +435,7 @@ sparky.init = function (config) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
   const scale = 1;
+  this._areMobileControlsActive = false;
   this._sparkycanv = document.createElement("canvas");
   this._sparkycanv.width = this._screenSize * scale;
   this._sparkycanv.height = this._screenSize * scale;
@@ -447,7 +448,7 @@ sparky.init = function (config) {
   this._sparkyctx.imageSmoothingEnabled = false;
 
   const el = document.querySelector(
-     ".board"
+    config && config.element ? "." + config.element : ".board"
   );
   const isEmbedded = !!el;
 
@@ -456,21 +457,99 @@ sparky.init = function (config) {
   if (el) {
     el.innerHTML = "";
     el.appendChild(this._sparkycanv);
+    this._parentElem = el;
   } else {
     document.body.appendChild(this._sparkycanv);
+    this._parentElem = document.body;
   }
   this._draw = config && config.draw ? config.draw : function () {};
   this._update = config && config.update ? config.update : function () {};
   const style = document.createElement("style");
 
+  const controlStyles = \`
+  
+  .mobile-controls-wrapper {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  .control-pad, .action-buttons, .control-buttons {
+    position: relative;
+
+    margin: 96px 48px;
+  }
+
+  .control {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background: #8b6d9c;
+    outline: none;
+    border: none;
+    color: #f2d3ab;
+    font-family: sans-serif;
+  }
+
+  .control:active {
+    background: #c69fa5;
+  }
+
+  .control-pad .control {
+    border-radius: 8px;
+  }
+
+  .action-buttons .control {
+    border-radius: 50%;
+  }
+
+  .control.control-left {
+    left: -48px;
+    top: 0;
+  }
+  .control.control-right {
+    left: 48px;
+    top: 0;
+  }
+  .control.control-up {
+    left: 0;
+    top: -48px;
+  }
+  .control.control-down {
+    left: 0;
+    top: 48px;
+  }
+  .control.control-a {
+    left: 0;
+    top: 48px;
+  }
+  .control.control-b {
+    left: -48px;
+    top: 0;
+  }
+  .control.control-select {
+    top: -28px;
+    left: 0;
+  }
+  .control.control-start {
+    top: 28px;
+    left: 0;
+  }
+  \`;
+
+  const canvasStyles = \`
+  display: block;
+  margin: 0 auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  \`;
+
   style.textContent = isEmbedded
     ? \`
     .sparky-canvas {
-      display: block;
-      margin: 0 auto;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
+      \${canvasStyles};
     }
+    \${controlStyles}
   \`
     : \`
     * {
@@ -483,11 +562,9 @@ sparky.init = function (config) {
     }
 
     canvas {
-      display: block;
-      margin: 0 auto;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
+      \${canvasStyles}
     }
+    \${controlStyles}
   \`;
 
   document.head.appendChild(style);
@@ -500,10 +577,10 @@ sparky.init = function (config) {
   );
 
   window.addEventListener("resize", () => this._fitToScreen());
-  window.addEventListener("keydown", e => this._onKeyPressed(e));
-  window.addEventListener("keyup", e => this._onKeyReleased(e));
+  window.addEventListener("keydown", (e) => this._onKeyPressed(e));
+  window.addEventListener("keyup", (e) => sparky._onKeyReleased(e));
 
-  window.requestAnimationFrame(t => this._step(t));
+  window.requestAnimationFrame((t) => this._step(t));
 
   if (config && typeof config.init === "function") {
     try {
@@ -512,6 +589,13 @@ sparky.init = function (config) {
       console.error(err);
     }
   }
+};
+
+sparky.getMovingYouInfernalMachine = sparky.init;
+sparky._terminate = function () {
+  window.removeEventListener("resize", sparky._fitToScreen);
+  window.removeEventListener("keydown", sparky._onKeyPressed);
+  window.addEventListener("keyup", sparky._onKeyReleased);
 };
 
 sparky._fitToScreen = function () {
@@ -532,6 +616,92 @@ sparky._fitToScreen = function () {
       this._sparkycanv.style.height = "auto";
     }
   }
+
+  if (window.innerWidth < 769) {
+    // this._areMobileControlsActive = true;
+    this._initMobileControls();
+  }
+};
+
+sparky._initMobileControls = function () {
+  if (!this._areMobileControlsActive) {
+    this._areMobileControlsActive = true;
+    const mobileControlsWrapper = document.createElement("div");
+    mobileControlsWrapper.className = "mobile-controls-wrapper";
+    mobileControlsWrapper.innerHTML =
+      '<div class="control-pad">  <button class="control control-left">&larr;</button>  <button class="control control-right">&rarr;</button>  <button class="control control-up">&uarr;</button>  <button class="control control-down">&darr;</button></div><div class="control-buttons">  <button class="control control-select">select</button>  <button class="control control-start">start</button></div><div class="action-buttons">  <button class="control control-a">A</button>  <button class="control control-b">B</button></div>    ';
+    this._parentElem.appendChild(mobileControlsWrapper);
+  }
+
+  const mobileControls = document.querySelectorAll(".control");
+  this._mobileControls = mobileControls;
+
+  mobileControls.forEach((ctrl) => {
+    ctrl.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.target.className.includes("left")) {
+        this._keys.left.pressed = true;
+        this._keys.left.justPressed = true;
+      }
+      if (e.target.className.includes("right")) {
+        this._keys.right.pressed = true;
+        this._keys.right.justPressed = true;
+      }
+      if (e.target.className.includes("up")) {
+        this._keys.up.pressed = true;
+        this._keys.up.justPressed = true;
+      }
+      if (e.target.className.includes("down")) {
+        this._keys.down.pressed = true;
+        this._keys.down.justPressed = true;
+      }
+      if (e.target.className.includes("select")) {
+        this._keys.select.pressed = true;
+        this._keys.select.justPressed = true;
+      }
+      if (e.target.className.includes("start")) {
+        this._keys.start.pressed = true;
+        this._keys.start.justPressed = true;
+      }
+      if (e.target.className.includes("control-a")) {
+        this._keys.a.pressed = true;
+        this._keys.a.justPressed = true;
+      }
+      if (e.target.className.includes("control-b")) {
+        this._keys.b.pressed = true;
+        this._keys.b.justPressed = true;
+      }
+    });
+    ctrl.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.target.className.includes("left")) {
+        this._keys.left.pressed = false;
+      }
+      if (e.target.className.includes("right")) {
+        this._keys.right.pressed = false;
+      }
+      if (e.target.className.includes("up")) {
+        this._keys.up.pressed = false;
+      }
+      if (e.target.className.includes("down")) {
+        this._keys.down.pressed = false;
+      }
+      if (e.target.className.includes("select")) {
+        this._keys.select.pressed = false;
+      }
+      if (e.target.className.includes("start")) {
+        this._keys.start.pressed = false;
+      }
+      if (e.target.className.includes("a")) {
+        this._keys.a.pressed = false;
+      }
+      if (e.target.className.includes("b")) {
+        this._keys.b.pressed = false;
+      }
+    });
+  });
 };
 
 sparky._step = function (timestamp) {
@@ -548,7 +718,7 @@ sparky._step = function (timestamp) {
     this._update(_dt / 1000);
     this._draw();
     this._sparkyctx.putImageData(this._screenBuffer, 0, 0);
-    this._frameRequestId = window.requestAnimationFrame(t => this._step(t));
+    this._frameRequestId = window.requestAnimationFrame((t) => this._step(t));
   } catch (err) {
     console.error(err);
     window.cancelAnimationFrame(this._frameRequestId);
@@ -771,10 +941,10 @@ sparky.print = function (_str, _x, _y, col = this._drawColor) {
   }
 
   let currX = 0;
-  needed.forEach(letter => {
+  needed.forEach((letter) => {
     let currY = 0;
     let addX = 0;
-    letter.forEach(row => {
+    letter.forEach((row) => {
       row.forEach((pixel, stringX) => {
         if (pixel) {
           this._updatePixel(
@@ -1038,7 +1208,7 @@ sparky.pget = function (x, y) {
     const [r, g, b] = this._screenBuffer.data.slice(pIndex, pIndex + 4);
 
     return this._rgbPal.findIndex(
-      col => col[0] === r && col[1] === g && col[2] === b
+      (col) => col[0] === r && col[1] === g && col[2] === b
     );
   } else {
     return "";
@@ -1058,6 +1228,8 @@ sparky._resetKeys = function () {
 };
 
 sparky._onKeyPressed = function (e) {
+  e.stopPropagation();
+  console.log({ e });
   this._actx.resume();
   switch (e.key.toLowerCase()) {
     case "arrowup":
@@ -1102,6 +1274,7 @@ sparky._onKeyPressed = function (e) {
 };
 
 sparky._onKeyReleased = function (e) {
+  e.stopPropagation();
   switch (e.key) {
     case "ArrowUp":
       this._keys.up.pressed = false;
@@ -1229,7 +1402,7 @@ sparky._soundEffect = function (
   volumeValue, //The sound's maximum volume
   wait, //The time, in seconds, to wait before playing the sound
   timeout, //A number, in seconds, which is the maximum duration for sound effects
-  fx, // what effect to apply: "fade-in", "fade-out", "vibrato", "slide"
+  fx, // what effect to apply: "fade-in", "fade-out", "vibrato", "slide", "noise"
   nextFreq // if there is any sound after this, for slide purposes
 ) {
   //Set the default values
@@ -1273,6 +1446,8 @@ sparky._soundEffect = function (
     case "slide":
       slide(oscillator.frequency);
       break;
+    case "noise":
+      noise(oscillator.frequency);
     default:
       break;
   }
@@ -1345,6 +1520,21 @@ sparky._soundEffect = function (
       timeout
     );
   }
+
+  function noise(frequencyNode) {
+    var waveTable = [];
+    var curfreq = 5 * frequency;
+    for (var i = 0; i < timeout; i += 0.001) {
+      waveTable.push(Math.random() * curfreq - curfreq / 3);
+    }
+
+    frequencyNode.setValueCurveAtTime(
+      waveTable,
+      actx.currentTime + wait,
+      timeout
+    );
+  }
+
   function play(node) {
     node.start(actx.currentTime + wait);
     node.stop(actx.currentTime + wait + timeout);
@@ -1454,7 +1644,7 @@ sparky._createImageData = function () {
     );
 
     const imgArray = sprite
-      .map(pixel => {
+      .map((pixel) => {
         const alpha = this._transparent[pixel] ? 0 : 255;
         const rgbPixel = [...this._rgbPal[pixel], alpha];
 
@@ -1523,7 +1713,7 @@ sparky.line = function (_x0, _y0, _x1, _y1, col = this._drawColor) {
 
 `;
 
-function getDownloadHtml(gameTitle, dataString, gameString) {
+function getDownloadHtml(gameTitle, dataString, gameString, libString) {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -1533,7 +1723,7 @@ function getDownloadHtml(gameTitle, dataString, gameString) {
       <title>${gameTitle}</title>
     </head>
     <body>
-      <script>${sparkyString}</script>
+      <script>${libString}</script>
       <script>${dataString}</script>
       <script>${gameString}</script>
     </body>
